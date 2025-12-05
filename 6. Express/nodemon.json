@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "server.js"
+  ],
+  "ignore": [
+    "node_modules",
+    "logs",
+    ".git",
+    ".cache",
+    "temp"
+  ],
+  "legacyWatch": true,
+  "delay": "500"
+}
