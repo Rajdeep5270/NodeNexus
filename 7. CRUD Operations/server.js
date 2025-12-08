@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 
-const PORT = 8080;
+const PORT = 8000;
 app.set("view engine", "ejs");
+app.use(express.urlencoded());
+
+let id = 104;
 
 let allUsers = [
     {
@@ -29,28 +32,87 @@ let allUsers = [
         phone: 9499565401,
         address: "Surat"
     },
-    {
-        id: 104,
-        name: "Ujjwal",
-        email: "ujjwalkalia@gmail.com",
-        password: "ujjwal@kalia",
-        phone: 8954623145,
-        address: "Vareli"
-    },
 ]
 
+
 app.get("/", (req, res) => {
-    res.render('home', {
+    res.render('view', {
         name: "Rajdeep",
         isAdmin: false,
         users: allUsers,
     });
+})
 
+// this is get method 
+// app.get("/adduser", (req, res) => {
+//     const user = req.query;
+
+//     user.id = id;
+
+//     id++;
+
+//     allUsers.push(user);
+
+//     res.redirect("/");
+// })
+
+// this is post method secure and safe 
+
+app.get("/addUser", (req, res) => {
+    res.render("form");
+});
+
+app.post("/adduser", (req, res) => {
+    const user = req.body;
+
+    user.id = id;
+    id++;
+
+    allUsers.push(user);
+
+    res.redirect("/");
+});
+
+app.get("/deleteUser", (req, res) => {
+    const userId = req.query.id;
+
+    allUsers = allUsers.filter((data) => data.id != userId);
+
+    res.redirect("/");
+});
+
+app.get("/editUser", (req, res) => {
+
+    const user = allUsers.find(user => user.id == req.query.id);
+
+    if (!user)
+        return res.redirect("/");
+
+    return res.render("edit", {
+        user
+    });
+
+})
+
+app.post("/updateUser", (req, res) => {
+    console.log(req.body);
+
+    allUsers = allUsers.map((user) => {
+        if (user.id == req.body.id) {
+            return req.body;
+        }
+        else {
+            return user;
+        }
+    })
+
+    res.redirect("/");
 })
 
 app.listen(PORT, (e) => {
     if (e) {
         console.log("Server is not started...");
     }
-    console.log("Server is started...");
-})
+    console.log("Server is Started...");
+});
+

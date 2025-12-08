@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">All Users</h1>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.map((user, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= user.id %>
+                            </td>
+                            <td>
+                                <%= user.name %>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                            <td>
+                                <%= user.password %>
+                            </td>
+                            <td>
+                                <%= user.phone %>
+                            </td>
+                            <td>
+                                <%= user.address %>
+                            </td>
+                            <td>
+                                <a href="/editUser?id=<%= user.id %>" class="btn btn-sm btn-warning">Edit</a>
+                            </td>
+                            <td>
+                                <a href="/deleteUser?id=<%= user.id %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-dark"><a href="/addUser" class="text-decoration-none text-light">Add
+                User</a></button>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
