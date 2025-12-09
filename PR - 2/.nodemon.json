@@ -1,8 +1,0 @@
-{
-  "ignore": [
-    "*.log",
-    "node_modules/",
-    "data/",
-    "temp/"
-  ]
-}
