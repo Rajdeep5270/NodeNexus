@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+
+    <style>
+        body h1,
+        h2,
+        table {
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Home Page</h1>
+    <!-- <h2>Hello, <%= name %>, <% if(isAdmin) {%> Admin <%} else {%> User <% } %>
+    </h2> -->
+
+    <table align="center" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th colspan="2">Actions</th>
+        </tr>
+        <% users.map((users, index)=> { %>
+            <tr>
+                <td>
+                    <%= users.id %>
+                </td>
+                <td>
+                    <%= users.name %>
+                </td>
+                <td>
+                    <%= users.email %>
+                </td>
+                <td>
+                    <%= users.password %>
+                </td>
+                <td>
+                    <%= users.phone %>
+                </td>
+                <td>
+                    <%= users.address %>
+                </td>
+                <td>
+                    <a href="">EDIT</a>
+                </td>
+                <td>
+                    <a href="">DELETE</a>
+                </td>
+            </tr>
+            <% })%>
+    </table>
+</body>
+
+</html>

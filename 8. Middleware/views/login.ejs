@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <h1 align="center">Login Page</h1>
+    <form action="/checkUser" method="post">
+        <table border="1" align="center">
+            <tr>
+                <td>Enter Age</td>
+                <td><input type="number" name="age"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><button><a href="/checkUser?=userAge<%= %>">Submit</a></button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
