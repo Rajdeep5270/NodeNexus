@@ -36,18 +36,6 @@ app.get("/", (req, res) => {
     res.render("login");
 });
 
-app.get("/registerPage", (req, res) => {
-    res.render("registerPage");
-});
-
-app.get("/backUser", (req, res) => {
-    res.redirect("/");
-});
-
-app.get("/userData", (req, res) => {
-    res.redirect("userData");
-})
-
 app.post("/addUser", (req, res) => {
     let user = req.body;
 
@@ -55,15 +43,27 @@ app.post("/addUser", (req, res) => {
 
     res.render("userData", {
         usersData
-    })
+    });
 });
 
 app.post("/loginUser", (req, res) => {
-    let userLoginInfo = req.body;
+    let { email, password } = req.body;
 
-    console.log(userLoginInfo);
+    let user = usersData.find(user => user.email == email && user.password == password);
 
-    res.render("userData");
+    if (!user) {
+        return res.redirect("registerPage");
+    }
+
+    res.render("userData", { usersData })
+});
+
+app.get("/registerPage", (req, res) => {
+    res.render("registerPage");
+});
+
+app.get("/backUser", (req, res) => {
+    res.redirect("/");
 });
 
 app.listen(PORT, (e) => {
