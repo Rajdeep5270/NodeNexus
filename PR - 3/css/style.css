@@ -15,7 +15,7 @@ body {
     background: #f4f6f9;
 }
 
-/* Login box */
+/* Container box for register */
 .container {
     background: #fff;
     padding: 35px 40px;
@@ -57,7 +57,7 @@ body {
     outline: none;
 }
 
-/* Button */
+/* Main Register Button */
 .btn {
     width: 100%;
     padding: 12px;
@@ -72,4 +72,55 @@ body {
 
 .btn:hover {
     background: #347ac9;
+}
+
+
+.container #registerBtn .btn,
+.container #backBtn .btn {
+    margin: 10px 0;
+    background-color: green;
+}
+
+/* Wider container for data page */
+.container.wide {
+    width: 700px;
+}
+
+/* Table wrapper with soft shadow + rounded corners */
+.table-wrapper {
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Fancy modern table */
+.fancy-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+/* Header styling */
+.fancy-table thead {
+    background: linear-gradient(90deg, #4a90e2, #357ac9);
+    color: white;
+}
+
+.fancy-table th,
+.fancy-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+
+/* Row alternate */
+.fancy-table tbody tr:nth-child(even) {
+    background: #f7f9fc;
+}
+
+/* Hover effect */
+.fancy-table tbody tr:hover {
+    background: #e8f1ff;
+    transition: 0.2s ease-in-out;
 }
