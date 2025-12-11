@@ -14,7 +14,7 @@ let usersData = [
         name: "Rajdeep Singh Shekhawat",
         profileName: "rajdeep5270",
         email: "rajdeepex5270@gmail.com",
-        password: "Rajdeep5270ex@"
+        password: "1234"
     },
     {
         id: 578,
@@ -39,7 +39,10 @@ app.get("/", (req, res) => {
 app.post("/addUser", (req, res) => {
     let user = req.body;
 
-    console.log(user);
+    let id = Math.floor(Math.random() * 999);
+    user.id = id;
+
+    usersData.push(user);
 
     res.render("userData", {
         usersData
@@ -52,7 +55,7 @@ app.post("/loginUser", (req, res) => {
     let user = usersData.find(user => user.email == email && user.password == password);
 
     if (!user) {
-        return res.redirect("registerPage");
+        return res.redirect("/registerPage");
     }
 
     res.render("userData", { usersData })
