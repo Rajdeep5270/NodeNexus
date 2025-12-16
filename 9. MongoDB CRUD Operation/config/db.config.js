@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const URI = "mongodb://localhost:27017/mydatabase";
+const URI = "mongodb://localhost:27017/Book_Management";
 
 mongoose.connect(URI)
     .then(() => {
