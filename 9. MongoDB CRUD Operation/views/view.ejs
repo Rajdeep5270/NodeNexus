@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <h1 class="text-center fs-1 py-5">All Books</h1>
+
+    <section class="books_section">
+        <div class="container">
+            <div class="row">
+                <% allBooks.map((book, i)=> { %>
+                    <div class="col-4 my-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="<%= book.book_image %>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">
+                                    <%= book.book_name %>
+                                </h2>
+                                <h5 class="card-text text-center my-3">
+                                    <%= book.book_author %>
+                                </h5>
+                                <div class="d-flex justify-content-evenly">
+                                    <p class="card-text text-center my-3 fw-bold">
+                                        ₹<%= book.book_price %>
+                                    </p>
+                                    <p class="card-text text-center my-3 fw-bold">
+                                        <%= book.book_lang %>
+                                    </p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center gap-5 my-3">
+                                    <a href="#" class="btn btn-outline-success">Edit</a>
+                                    <a href="/deleteBook?bookId=<%= book._id %>"
+                                        class="btn btn-outline-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <section class="addNewBook text-center py-5">
+        <a href="/addBookPage"><button class="btn btn-outline-secondary">Add Book</button></a>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

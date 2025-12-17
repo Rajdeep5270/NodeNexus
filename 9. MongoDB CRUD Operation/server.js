@@ -1,8 +1,7 @@
 const express = require('express');
-const { default: mongoose } = require('mongoose');
 const bookModel = require('./model/book.model');
+require('mongoose');
 require('./config/db.config')
-require('./model/book.model');
 
 const PORT = 8080;
 
@@ -11,7 +10,17 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded());
 
 app.get("/", (req, res) => {
-    res.render("form"); 
+    bookModel.find()
+        .then((allBooks) => {
+            res.render("view", { allBooks });
+        })
+        .catch(e => {
+            console.log(e);
+        });
+})
+
+app.get("/addBookPage", (req, res) => {
+    res.render("form");
 })
 
 app.post("/addBook", (req, res) => {
@@ -21,6 +30,18 @@ app.post("/addBook", (req, res) => {
     }).catch((e) => {
         console.log("Data not added...", e);
     });
+
+    res.redirect("/");
+});
+
+app.get("/deleteBook", (req, res) => {
+    bookModel.findByIdAndDelete(req.query.bookId)
+        .then(() => {
+            console.log("Book deleted successfully...");
+        })
+        .catch(e => {
+            console.log("Book not deleted", e);
+        })
 
     res.redirect("/");
 });
