@@ -1,0 +1,59 @@
+:root {
+    --background-color: #1E1E1E;
+    --secondary-color: #5A9CB5;
+    --buttons: #FAAC68;
+    --text-color: #EFECE3;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    color: var(--text-color);
+}
+
+/* navbar section  */
+.navigation-bar .navigation-menu button span {
+    color: var(--text-color);
+}
+
+.navigation-bar .navigation-menu button:hover span {
+    color: var(--background-color);
+    background-color: var(--buttons);
+    transition: all 0.3s ease-in-out;
+}
+
+.navigation-bar .navigation-menu button {
+    border: 1px solid var(--buttons);
+    background-color: transparent;
+}
+
+.navigation-bar .navigation-menu nav ul li a {
+    border: 1px solid var(--buttons);
+    border-radius: 15px;
+}
+
+.navigation-bar .navigation-menu nav ul li a:hover {
+    background-color: var(--buttons);
+    color: var(--background-color);
+    transition: all 0.3s ease-in-out;
+}
+
+/* banner section  */
+.carousel .carousel-inner .carousel-item img {
+    /* height: 900px; */
+}

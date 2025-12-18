@@ -1,0 +1,3 @@
+home page => navbar => logo => login/register => user/admin
+if user => only he can view movies only render view page 
+if admin => add page / view page / update / delete/
