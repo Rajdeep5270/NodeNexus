@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie | MovieHub</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../public/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <section class="navigation-bar position-absolute top-0 start-0 z-3 w-100">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between py-4">
+                    <h2>🎬 MovieHub</h2>
+                    <nav>
+                        <ul class="d-flex mb-0 ps-0 list-unstyled">
+                            <li><a href="/" class="mx-2 px-4 py-2">Home</a></li>
+                            <li><a href="#viewMovies" class="mx-2 px-4 py-2">View All Movie</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1 class="display-4 fw-bold">Add Unlimited Movie Content</h1>
+        <p class="lead">Keep your collection growing — add new movies anytime, anywhere!</p>
+    </section>
+
+    <!-- ADD MOVIE FORM -->
+    <section class="addMovie">
+        <div class="container">
+            <div class="add-movie-card text-white">
+                <h3 class="mb-4 text-center">Add New Movie</h3>
+                <form action="/addMovie" method="POST">
+                    <input class="form-control" type="text" name="movie_name" placeholder="Movie Name" required>
+
+                    <input class="form-control" type="text" name="release_year" placeholder="Release Year" required>
+
+                    <input class="form-control" type="text" name="movie_image" placeholder="Image URL" required>
+
+                    <input class="form-control" type="text" name="movie_lang" placeholder="Language" required>
+
+                    <textarea class="form-control" name="movie_desc" placeholder="Description" rows="3"
+                        required></textarea>
+
+                    <input class="form-control" type="text" name="movie_director" placeholder="Director" required>
+
+                    <input class="form-control" type="text" name="movie_writer" placeholder="Writer" required>
+
+                    <input class="form-control" type="text" name="movie_stars" placeholder="Stars" required>
+
+                    <button type="submit" class="btn btn-danger mt-3">Add Movie</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-5">
+        <p class="mb-0 text-secondary">© 2025 MovieHub | All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- main javascript file  -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
