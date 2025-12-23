@@ -11,7 +11,7 @@ const bookSchema = mongoose.Schema({
     },
     book_price: {
         type: String,
-        requried: true,
+        required: true,
     },
     book_lang: {
         type: String,
