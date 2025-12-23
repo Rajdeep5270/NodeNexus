@@ -11,7 +11,6 @@ app.get("/", (req, res) => {
     res.render("view");
 })
 
-
 // to start server 
 app.listen(PORT, e => {
     if (e)

@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form method="post" action="/addBook">
+                            <form method="post" action="/addBook" enctype="multipart/form-data">
                                 <!-- Book Name -->
                                 <div class="mb-3">
                                     <label class="form-label">Book Name</label>
@@ -54,8 +54,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Book Image</label>
-                                    <input type="text" class="form-control" name="book_image"
-                                        placeholder="Paste book image url">
+                                    <input type="file" class="form-control" name="book_image" />
                                     </select>
                                 </div>
 
