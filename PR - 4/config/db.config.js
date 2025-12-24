@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const URI = "mongodb://localhost:27017/movie-management";
+const URI = "mongodb://localhost:27017/Movie_Management_PR";
 
 mongoose.connect(URI)
     .then(() => {

@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form method="post" action="/updateBook">
+                            <form method="post" action="/updateBook" enctype="multipart/form-data">
                                 <!-- id  -->
                                 <div class="mb-3">
                                     <input type="hidden" class="form-control" name="book_id" value="<%= findBook.id %>">
@@ -57,9 +57,11 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <img src="../<%= findBook.book_image %>" alt="<%= findBook.book_name%>" width="100">
+                                    <br>
                                     <label class="form-label">Book Image</label>
-                                    <input type="text" class="form-control" name="book_image"
-                                        value="<%= findBook.book_image %>">
+                                    <input type="file" class="form-control" name="book_image"
+                                        value="<%= findBook.book_image%>">
                                     </select>
                                 </div>
 

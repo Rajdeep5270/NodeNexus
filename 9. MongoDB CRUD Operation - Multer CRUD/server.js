@@ -1,7 +1,8 @@
 const express = require('express');
 const bookModel = require('./model/book.model');
 const multer = require('multer');
-// const path = require('path');
+const fs = require('fs');
+const path = require('path');
 require('mongoose');
 require('./config/db.config')
 
@@ -54,11 +55,11 @@ app.post("/addBook", upload.single('book_image'), (req, res) => {
 
     bookModel.create(req.body).then(() => {
         console.log("Data added successfully...");
+        res.redirect("/");
     }).catch((e) => {
         console.log("Data not added...", e);
     });
 
-    res.redirect("/");
 });
 
 // to edit and fill edit form logic 
@@ -87,11 +88,31 @@ app.get("/editBook/:id", async (req, res) => {
 });
 
 // to update filled edit form 
-app.post("/updateBook", async (req, res) => {
-    // console.log(req.body.book_id);
+app.post("/updateBook", upload.single('book_image'), async (req, res) => {
+    // console.log(req.file);
+    // console.log(req.body);
 
-    const updatedBook = await bookModel.findByIdAndUpdate(req.body.book_id, req.body, { new: true });
+    if (req.file) {
+        // old book find logic 
+        const bookData = await bookModel.findById(req.body.book_id);
 
+        // old book remove logic 
+        fs.unlink(bookData.book_image, e => { })
+
+        req.body.book_image = req.file.path;
+
+        const updatedBook = await bookModel.findByIdAndUpdate(req.body.book_id, req.body, { new: true });
+
+        console.log(`Updated Data : ${updatedBook}`);
+    }
+    else {
+        const updatedBook = await bookModel.findByIdAndUpdate(req.body.book_id, req.body, { new: true });
+
+        console.log(`Updated Data : ${updatedBook}`);
+    }
+
+
+    // for debugging 
     // console.log(updatedBook);
 
     res.redirect("/");
@@ -99,12 +120,26 @@ app.post("/updateBook", async (req, res) => {
 
 // delete book logic and route to("/")
 app.get("/deleteBook", (req, res) => {
+    console.log(req.query);
+
+    // data delete logic 
     bookModel.findByIdAndDelete(req.query.bookId)
         .then(() => {
             console.log("Book deleted successfully...");
         })
         .catch(e => {
             console.log("Book not deleted", e);
+        })
+
+    // data image delete logic from upload folder 
+    bookModel.findById(req.query.bookId)
+        .then(book => {
+            const bookPath = book.book_image;
+            fs.unlink(bookPath, e => { });
+            console.log("Book image deleted successfully...");
+        })
+        .catch(e => {
+            console.log(e);
         })
 
     res.redirect("/");
