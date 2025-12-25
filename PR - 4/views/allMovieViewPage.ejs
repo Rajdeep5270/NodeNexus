@@ -28,9 +28,6 @@
                             <li>
                                 <a href="/addMovie" class="mx-2 px-4 py-2">Add Movie</a>
                             </li>
-                            <li>
-                                <a href="/viewAllMoviePage" class="mx-2 px-4 py-2">View All Movie</a>
-                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -50,20 +47,53 @@
                                     Watch</button></a>
                         </div>
                         <% } else{ %>
-                            <div>
+                            <div class="mb-5">
                                 <h3 class="text-center">All Movies 😀</h3>
                             </div>
                             <%} %>
                                 <% movies.forEach(movie=> { %>
-                                    <div class="col-md-3">
-                                        <div class="card movie-card bg-dark text-white">
-                                            <div class="card-img">
-                                                <img src="<%= movie.movie_image %>">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="movie_image position-relative">
+                                                    <img src="<%= movie.movie_image %>" alt="" width="270px"
+                                                        height="420px">
+                                                    <div
+                                                        class="position-absolute top-50 start-50 translate-middle bg-dark z-3">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="card-body">
-                                                <h6 class="card-title">
-                                                    <%= movie.movie_type%>
-                                                </h6>
+                                            <div class="col-7">
+                                                <div
+                                                    class="px-2 movie_content d-flex align-items-start justify-content-center flex-column h-100 w-100">
+                                                    <h2>
+                                                        <%= movie.movie_name %>
+                                                    </h2>
+                                                    <p class="mb-2">
+                                                        <%=movie.movie_desc %>
+                                                    </p>
+                                                    <p class="mb-2">
+                                                        <b>Director</b> - <%= movie.movie_director %>
+                                                    </p>
+                                                    <p class="mb-2">
+                                                        <b>Writer</b> - <%= movie.movie_writer %>
+                                                    </p>
+                                                    <p class="mb-2">
+                                                        <b>Stars</b> - <%= movie.movie_stars %>
+                                                    </p>
+                                                    <p class="mb-2">
+                                                        <b>Language</b> - <%= movie.movie_lang %>
+                                                    </p>
+                                                    <p class="mb-2">
+                                                        <b>Type</b> - <%= movie.movie_type %>
+                                                    </p>
+                                                    <div class="my-3 action_button position-relative">
+                                                        <a href="/editMovie/<%= movie.id %>"
+                                                            class="px-4 py-2 rounded-4 mx-1 edit">Edit</a>
+                                                        <a href="/deleteMovie/<%= movie.id %>"
+                                                            class="px-4 py-2 rounded-4 mx-1 delete">Delete</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -13,15 +13,12 @@ app.use(express.static(__dirname));
 app.get("/", (req, res) => {
     movie.find()
         .then((movies) => {
-            const foundMovie = movies.find(movie => movie.id == req.query.id);
-            // for debugging 
-            // console.log(foundMovie);
             console.log("Data founded...");
-            res.render("view", { movies, foundMovie });
+            res.render("view", { movies });
         })
         .catch(e => {
             console.log("Data not founded...");
-        })
+        });
 })
 
 // add movie form rendering
@@ -46,15 +43,45 @@ app.post("/addMovie", (req, res) => {
 });
 
 // all movies view page 
-app.get("/viewAllMoviePage", (req, res) => {
-    movie.find()
-        .then((movies) => {
-            console.log("All Data of View Page Found...");
-            res.render("allMovieViewPage", { movies });
+app.get("/viewAllMoviePage", async (req, res) => {
+    const movies = await movie.find();
+
+    res.render("allMovieViewPage", { movies });
+})
+
+// edit form page 
+app.get("/editMovie/:id", async (req, res) => {
+    // console.log(req.params);
+
+    const foundMovie = await movie.findById(req.params.id);
+
+    // console.log(foundMovie);
+
+    res.render("editMovieForm", { foundMovie });
+})
+
+// update movie 
+app.post("/updateMovie", async (req, res) => {
+    // console.log(req.body);
+
+    const updatedMovie = await movie.findByIdAndUpdate(req.body.id, req.body, { new: true });
+    console.log(updatedMovie);
+
+    res.redirect("/viewAllMoviePage");
+})
+
+// delete a movie logic  
+app.get("/deleteMovie/:id", (req, res) => {
+
+    movie.findByIdAndDelete(req.params.id)
+        .then(() => {
+            console.log("Movie Deleted Successfully...");
         })
         .catch(e => {
-            console.log("All Data of View Page not Found...", e);
+            console.log("Movie Deletion Unsuccessful...");
         });
+
+    res.redirect("/viewAllMoviePage");
 })
 
 // to start server 

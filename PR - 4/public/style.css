@@ -4,6 +4,8 @@
     --buttons: #FAAC68;
     --text-color: #EFECE3;
     --footer-bg: #111;
+    --edit-btn: #f59e0b;
+    --delete-btn: #dc2626;
 }
 
 * {
@@ -174,4 +176,30 @@ a {
 /* ================= FOOTER ================= */
 footer {
     background: var(--footer-bg);
+}
+
+/* all movie view page  */
+.movie .movie_content h2,
+.movie .movie_content p b {
+    color: var(--buttons);
+}
+
+.movie .movie_content .action_button .edit {
+    border: 2px solid var(--edit-btn);
+    transition: all 0.3s ease-in-out;
+}
+
+.movie .movie_content .action_button .delete {
+    border: 2px solid var(--delete-btn);
+    transition: all 0.3s ease-in-out;
+}
+
+.movie .movie_content .action_button .edit:hover {
+    background-color: var(--edit-btn);
+    border: 2px solid var(--edit-btn);
+}
+
+.movie .movie_content .action_button .delete:hover {
+    background-color: var(--delete-btn);
+    border: 2px solid var(--delete-btn);
 }
