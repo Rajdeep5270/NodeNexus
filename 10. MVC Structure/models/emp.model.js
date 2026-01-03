@@ -9,10 +9,6 @@ const empSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    employeeDepartment: {
-        type: String,
-        required: true,
-    },
     employeeRole: {
         type: String,
         required: true,

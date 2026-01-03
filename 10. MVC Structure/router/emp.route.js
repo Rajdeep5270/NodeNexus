@@ -1,10 +1,11 @@
 const express = require('express');
 
-const { empFormPage, addUser } = require("../controller/emp.controller");
+const { empFormPage, addEmp, viewAllEmployee } = require("../controller/emp.controller");
 
 const empRoute = express.Router();
 
 empRoute.get('/', empFormPage);
-empRoute.post('/addUser', addUser);
+empRoute.post('/addEmp', addEmp);
+empRoute.get('/viewAllEmployee', viewAllEmployee);
 
 module.exports = empRoute;

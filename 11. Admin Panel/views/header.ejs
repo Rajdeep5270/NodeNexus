@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar & Sidebar Layout</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- main css  -->
+    <link rel="stylesheet" href="/public/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-cube"></i>
+            <span>DashboardPro</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/" class="active">Dashboard</a></li>
+            <li><a href="/viewAdminPage">View</a></li>
+            <li><a href="/addAdminFormPage">Add Form</a></li>
+        </ul>
+
+        <div class="user-actions">
+            <button class="login-btn">Log In</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+
+        <div class="mobile-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-tachometer-alt"></i> Main Menu</h3>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="/viewAdminPage"><i class="fas fa-chart-line"></i> View</a></li>
+            <li><a href="/addAdminFormPage"><i class="fas fa-project-diagram"></i> Add Form</a></li>
+        </ul>
+
+        <div class="sidebar-divider"></div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>

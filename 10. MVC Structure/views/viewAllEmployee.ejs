@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Directory | All Users</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- DataTables CSS (optional for enhanced tables) -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+
+<body>
+    <div class="users-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="bi bi-people-fill me-3"></i>Employee Directory</h1>
+            <p>View and manage all registered employees in your organization</p>
+
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number">
+                        <%= allEmp.length %>
+                    </span>
+                    <span class="stat-label">Total Employees</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">
+                        <% let sum=0; %>
+                            <% allEmp.forEach(emp=> { %>
+                                <% sum +=emp.employeeSalary; %>
+                                    <% }); %>
+                                        <%= sum %>
+                    </span>
+                    <span class="stat-label">Monthly Salary</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Wrapper -->
+        <div class="table-wrapper">
+            <table class="employee-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Employee</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Salary</th>
+                        <th>Gender</th>
+                        <th>Hobbies</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample Data - Replace with dynamic content -->
+                    <% allEmp.map((emp, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= index + 1 %>
+                            </td>
+                            <td>
+                                <strong>
+                                    <%= emp.employeeName %>
+                                </strong>
+                            </td>
+                            <td>
+                                <%= emp.employeeEmail %>
+                            </td>
+                            <td><span class="role-badge role-developer">
+                                    <%= emp.employeeRole%>
+                                </span></td>
+                            <td class="salary-cell">
+                                <%= emp.employeeSalary %>
+                            </td>
+                            <td>
+                                <%= emp.gender %>
+                            </td>
+                            <td>
+                                <%= emp.hobbies %>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn btn-edit" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="action-btn btn-delete" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <!-- Add more rows dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Navigation -->
+        <div class="page-navigation">
+            <a href="/empForm//" class="back-to-form">
+                <i class="bi bi-arrow-left"></i> Back to Registration Form
+            </a>
+        </div>
+    </div>
+
+    <!-- Optional: DataTables JS for enhanced table features -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+</body>
+
+</html>

@@ -1,10 +1,10 @@
 const employee = require('../models/emp.model');
 
-const empFormPage = (req, res) => {
+module.exports.empFormPage = (req, res) => {
     res.render('empForm');
 }
 
-const addUser = async (req, res) => {
+module.exports.addEmp = async (req, res) => {
     // console.log(req.body);
     const empAdded = await employee.create(req.body);
 
@@ -15,10 +15,18 @@ const addUser = async (req, res) => {
         console.log("Employees details insertion failed...");
     }
 
-    res.redirect('/empForm/')
+    res.redirect('/empForm/');
 }
 
-module.exports = {
-    empFormPage,
-    addUser
-};
+module.exports.viewAllEmployee = async (req, res) => {
+    const allEmp = await employee.find();
+    console.log(allEmp)
+    if (allEmp) {
+        console.log("Employees data found...")
+    }
+    else {
+        console.log("Employees data not found...");
+    }
+
+    res.render('viewAllEmployee', { allEmp });
+}
