@@ -1,0 +1,72 @@
+<%- include('header') %>
+    <div class="main-content">
+        <div class="admin-view">
+
+            <div class="content-header">
+                <h1>Admin List</h1>
+                <p>All registered admins are listed below</p>
+            </div>
+
+            <div class="admin-grid">
+                <% allAdminData.map((admin,index)=> { %>
+
+                    <!-- admin cards -->
+                    <div class="admin-card-box">
+                        <div class="admin-avatar">
+                            <img src="<%= admin.profileImage %>" alt="Admin">
+                        </div>
+
+                        <span class="admin-index">
+                            ID : <%= index+1 %>
+                        </span>
+
+                        <h3 class="admin-title">
+                            <i class="fas fa-user-shield"></i>
+                            <%= admin.firstName %>
+                                <%= admin.lastName %>
+                        </h3>
+
+                        <p class="admin-detail">
+                            <i class="fas fa-envelope"></i>
+                            <%= admin.email %>
+                        </p>
+
+                        <p class="admin-detail">
+                            <i class="fas fa-phone"></i>
+                            <%= admin.phone %>
+                        </p>
+
+                        <p class="admin-detail">
+                            <i class="fas fa-venus-mars"></i>
+                            <%= admin.gender %>
+                        </p>
+
+                        <p class="admin-detail">
+                            <i class="fas fa-city"></i>
+                            <%= admin.city %>
+                        </p>
+
+                        <p class="admin-detail">
+                            <i class="fas fa-heart"></i>
+                            <%= admin.hobbies %>
+                        </p>
+
+                        <div class="admin-card-actions">
+                            <a href="/deleteAdmin/<%= admin.id %>">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+        </div>
+    </div>
+    <%- include('footer') %>

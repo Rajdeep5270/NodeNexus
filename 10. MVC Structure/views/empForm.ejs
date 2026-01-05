@@ -26,7 +26,7 @@
 
         <!-- Form Content -->
         <div class="form-content">
-            <form action="/empForm/addUser" method="POST">
+            <form action="/empForm/addEmp" method="POST">
                 <!-- Name Field -->
                 <div class="form-floating-group">
                     <i class="bi bi-person input-icon"></i>
@@ -45,16 +45,6 @@
                     <label class="form-floating-label" for="employeeEmail">Email Address</label>
                     <div class="status-indicator"></div>
                     <div class="form-text">Company email address for official communication</div>
-                </div>
-
-                <!-- Department Field -->
-                <div class="form-floating-group">
-                    <i class="bi bi-building input-icon"></i>
-                    <input type="text" class="form-floating-input" id="employeeDepartment" name="employeeDepartment"
-                        placeholder=" " required>
-                    <label class="form-floating-label" for="employeeDepartment">Department</label>
-                    <div class="status-indicator"></div>
-                    <div class="form-text">Department where employee will work</div>
                 </div>
 
                 <!-- Role Selection - WORKING DROPDOWN -->
@@ -139,7 +129,15 @@
                         <i class="bi bi-person-plus-fill"></i>
                         Register Employee
                     </button>
-                    <button type="reset" class="btn btn-secondary">
+
+                    <button class="btn btn-primary">
+                        <a href="/empForm/viewAllEmployee" class="text-light text-decoration-none">
+                            <i class="bi bi-person-plus-fill"></i>
+                            View Employee
+                        </a>
+                    </button>
+
+                    <button type="reset" class="btn btn-primary">
                         <i class="bi bi-arrow-clockwise"></i>
                         Reset Form
                     </button>
