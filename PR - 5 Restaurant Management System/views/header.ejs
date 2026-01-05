@@ -51,7 +51,7 @@
                     <!-- Menu Link -->
                     <li class="nav-item">
                         <a class="nav-link <%= (typeof page !== 'undefined' && page === 'menu') ? 'active' : '' %>"
-                            href="/menu">
+                            href="#">
                             <i class="fas fa-utensils"></i> Menu
                             <span class="notification-dot"></span>
                         </a>
@@ -62,20 +62,19 @@
                         <a class="nav-link dropdown-toggle <%= (typeof page !== 'undefined' && page === 'categories') ? 'active' : '' %>"
                             href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <i class="fas fa-layer-group"></i> Categories
+                            <i class="fas fa-layer-group"></i> Add Dishes
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                            <li><a class="dropdown-item" href="">Gujarati</a></li>
-                            <li><a class="dropdown-item" href="">Rajasthani</a></li>
-                            <li><a class="dropdown-item" href="">South Indian</a></li>
-                            <li><a class="dropdown-item" href="">Chinese</a></li>
+                            <li><a class="dropdown-item" href="/addGujratiDishPage">Gujarati</a></li>
+                            <li><a class="dropdown-item" href="/addRajasthaniDishPage">Rajasthani</a></li>
+                            <li><a class="dropdown-item" href="/addSouthIndianDishPage">South Indian</a></li>
                         </ul>
                     </li>
 
                     <!-- Orders Link -->
                     <li class="nav-item">
                         <a class="nav-link <%= (typeof page !== 'undefined' && page === 'orders') ? 'active' : '' %>"
-                            href="/orders">
+                            href="#">
                             <i class="fas fa-shopping-bag"></i> Orders
                             <span class="nav-stats-badge">5 New</span>
                         </a>

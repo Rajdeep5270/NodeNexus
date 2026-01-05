@@ -1,0 +1,74 @@
+<%-include("../header")%>
+
+    <div class="dashboard-container">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="dashboard-hero text-center mb-5">
+                <h1 class="fw-bold">Add Gujarati Dish</h1>
+                <p class="text-muted max-width-600 mx-auto">
+                    Add authentic Gujarati dishes like Dhokla, Undhiyu, Thepla, Khandvi & more.
+                </p>
+            </div>
+
+            <!-- Add Dish Card -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+
+                    <div class="category-card bg-white p-4">
+
+                        <!-- Icon -->
+                        <div class="category-icon">
+                            <i class="fa-solid fa-bowl-food text-warning fs-3"></i>
+                        </div>
+
+                        <!-- Form UI -->
+                        <form>
+
+                            <!-- Dish Name -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Dish Name</label>
+                                <input type="text" class="form-control" placeholder="e.g. Dhokla">
+                            </div>
+
+                            <!-- Price -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Price (₹)</label>
+                                <input type="number" class="form-control" placeholder="e.g. 120">
+                            </div>
+
+                            <!-- Dish Image -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Dish Image</label>
+                                <input type="file" class="form-control">
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Description</label>
+                                <textarea class="form-control" rows="3"
+                                    placeholder="Short description about the Gujarati dish"></textarea>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex gap-3 justify-content-center">
+                                <a href="/">
+                                    <button type="button" class="btn btn-outline-secondary px-4">
+                                        Cancel
+                                    </button></a>
+                                <button type="button" class="btn btn-warning px-5 text-white">
+                                    <i class="fa-solid fa-plus me-2"></i>Add Dish
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <%-include("../footer")%>

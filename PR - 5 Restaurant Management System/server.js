@@ -6,7 +6,8 @@ const app = express();
 
 // view engine set to ejs to view design of website
 app.set("view engine", "ejs");
-// route for which type of food 
+
+// route for main dashboard
 app.use('/', require('./routes/item.route'));
 app.use(express.static(__dirname));
 
@@ -17,4 +18,4 @@ app.listen(PORT, e => {
     }
 
     console.log("Server is started...");
-});
+}); 

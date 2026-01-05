@@ -1,0 +1,174 @@
+<%- include('../header') %>
+
+<div class="dashboard-container container-fluid">
+
+    <!-- Hero Section -->
+    <section class="hero-section py-5">
+        <div class="dashboard-hero text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary mb-3">Gujarati Cuisine</h1>
+            <p class="lead text-muted max-width-600 mx-auto">
+                Enjoy the authentic vegetarian flavors of Gujarat – sweet, tangy, and full of taste.
+            </p>
+        </div>
+    </section>
+
+    <!-- Gujarati Dishes Grid -->
+    <section class="food-categories">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+
+                <!-- Dish 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card shadow-lg border-0">
+                        <div class="category-img-container">
+                            <img src="https://images.unsplash.com/photo-1602438380935-3ec59f1f3d2b?auto=format&fit=crop&w=600&q=80"
+                                class="card-img-top" alt="Dhokla">
+                            <div class="category-overlay">
+                                <span class="badge bg-success text-dark">Vegetarian</span>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-leaf fa-2x text-success"></i>
+                            </div>
+                            <h3 class="card-title fw-bold text-primary">Dhokla</h3>
+                            <p class="card-text text-muted">
+                                Soft and spongy steamed cake, lightly tangy and perfect as a snack.
+                            </p>
+                            <span class="badge bg-light text-dark">₹120</span>
+
+                            <!-- Edit & Delete Buttons -->
+                            <div class="d-flex gap-2 justify-content-center mt-3">
+                                <a href="/addGujratiDishPage/gujratiFoodEditPage" class="btn btn-warning btn-sm text-white">
+                                    <i class="fa-solid fa-pen me-1"></i> Edit
+                                </a>
+                                <a href="/gujarati/delete/1" class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash me-1"></i> Delete
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card shadow-lg border-0">
+                        <div class="category-img-container">
+                            <img src="https://images.unsplash.com/photo-1628139211040-5b2a3f08b84e?auto=format&fit=crop&w=600&q=80"
+                                class="card-img-top" alt="Thepla">
+                            <div class="category-overlay">
+                                <span class="badge bg-warning text-dark">Traditional</span>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-utensils fa-2x text-warning"></i>
+                            </div>
+                            <h3 class="card-title fw-bold text-primary">Thepla</h3>
+                            <p class="card-text text-muted">
+                                Spiced flatbread made from gram flour and fenugreek leaves, perfect for travel.
+                            </p>
+                            <span class="badge bg-light text-dark">₹100</span>
+
+                            <!-- Edit & Delete Buttons -->
+                            <div class="d-flex gap-2 justify-content-center mt-3">
+                                <a href="/addGujratiDishPage/gujratiFoodEditPage" class="btn btn-warning btn-sm text-white">
+                                    <i class="fa-solid fa-pen me-1"></i> Edit
+                                </a>
+                                <a href="/gujarati/delete/2" class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash me-1"></i> Delete
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card shadow-lg border-0">
+                        <div class="category-img-container">
+                            <img src="https://images.unsplash.com/photo-1604908177647-0c45c6dc58bb?auto=format&fit=crop&w=600&q=80"
+                                class="card-img-top" alt="Khandvi">
+                            <div class="category-overlay">
+                                <span class="badge bg-success text-dark">Snack</span>
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-seedling fa-2x text-success"></i>
+                            </div>
+                            <h3 class="card-title fw-bold text-primary">Khandvi</h3>
+                            <p class="card-text text-muted">
+                                Delicate rolls made with gram flour and tempered spices, melts in your mouth.
+                            </p>
+                            <span class="badge bg-light text-dark">₹90</span>
+
+                            <!-- Edit & Delete Buttons -->
+                            <div class="d-flex gap-2 justify-content-center mt-3">
+                                <a href="/addGujratiDishPage/gujratiFoodEditPage" class="btn btn-warning btn-sm text-white">
+                                    <i class="fa-solid fa-pen me-1"></i> Edit
+                                </a>
+                                <a href="" class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash me-1"></i> Delete
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="container-fluid">
+        <div class="row mt-5 pt-4">
+            <div class="col-12">
+                <div class="stats-container p-4 rounded-3 shadow-sm bg-light">
+                    <h4 class="text-center mb-4 fw-bold">Gujarati Food Stats</h4>
+                    <div class="row text-center">
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="stat-item">
+                                <h2 class="display-6 fw-bold text-primary">12+</h2>
+                                <p class="text-muted">Traditional Dishes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="stat-item">
+                                <h2 class="display-6 fw-bold text-primary">100%</h2>
+                                <p class="text-muted">Authentic Taste</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <div class="stat-item">
+                                <h2 class="display-6 fw-bold text-primary">Vegetarian</h2>
+                                <p class="text-muted">Healthy & Balanced</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="container-fluid">
+        <div class="row mt-5 p-0">
+            <div class="col-12 text-center">
+                <div class="cta-section p-5 rounded-3 bg-primary text-white shadow">
+                    <h3 class="fw-bold mb-3">Taste the Authentic Flavors</h3>
+                    <p class="mb-4">Order traditional Gujarati dishes prepared with love and care.</p>
+                    <a href="#" class="btn btn-light btn-lg px-4">
+                        <i class="fas fa-crown me-2"></i> Order Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<%- include('../footer') %>
