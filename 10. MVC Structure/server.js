@@ -4,7 +4,7 @@ const app = express();
 const PORT = 8080;
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", require('./router/index'));
 app.use(express.static(__dirname));
@@ -16,4 +16,4 @@ app.listen(PORT, e => {
     }
 
     console.log("Server is started...");
-})
+})    

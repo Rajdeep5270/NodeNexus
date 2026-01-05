@@ -48,22 +48,18 @@ module.exports.addEmployeeDetails = async (req, res) => {
         }
 
         console.log("Admin Added Successfully...");
-        res.redirect("/");
     }
     catch (e) {
         console.log("Admin not added");
         console.log("Error : ", e);
         res.redirect('/notFound')
     }
+    return res.redirect("/viewAdminPage");
 }
 
 // delete admin logic 
 module.exports.deleteAdmin = async (req, res) => {
     try {
-        // image deletion logic 
-        const imagePath = await admin.findById(req.params.id);
-        fs.unlink(imagePath.profileImage, e => { });
-
         const deletedAdmin = await admin.findByIdAndDelete(req.params.id);
         console.log(deletedAdmin);
 
@@ -72,9 +68,55 @@ module.exports.deleteAdmin = async (req, res) => {
             return res.redirect('/notFound')
         }
 
-
+        fs.unlink(deletedAdmin.profileImage, () => { });
         console.log("Admin deleted successfully");
         res.redirect('/viewAdminPage');
+    } catch (e) {
+        console.log("Admin not added");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
+}
+
+//edit admin logic 
+module.exports.editAdmin = async (req, res) => {
+    // console.log(req.params);
+    const editAdmin = await admin.findById(req.params.id);
+
+    res.render('editForm', { editAdmin });
+}
+
+// update admin logic
+module.exports.updateAdmin = async (req, res) => {
+    try {
+        // console.log(req.file);
+        if (req.file) {
+            console.log(req.file.path);
+            req.body.profileImage = req.file.path;
+
+            const updatedAdmin = await admin.findByIdAndUpdate(req.params.id, req.body);
+
+            fs.unlink(updatedAdmin.profileImage, () => { });
+
+            if (!updatedAdmin) {
+                console.log("Admin not updated");
+                return res.redirect('/editAdmin')
+            }
+
+            console.log("Admin updated successfully");
+        }
+        else {
+            const updatedAdmin = await admin.findByIdAndUpdate(req.params.id, req.body);
+
+            if (!updatedAdmin) {
+                console.log("Admin not updated");
+                return res.redirect('/editAdmin')
+            }
+
+            console.log("Admin updated successfully");
+        }
+
+        return res.redirect('/viewAdminPage')
     } catch (e) {
         console.log("Admin not added");
         console.log("Error : ", e);

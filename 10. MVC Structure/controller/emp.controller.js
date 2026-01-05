@@ -18,9 +18,10 @@ module.exports.addEmp = async (req, res) => {
     res.redirect('/empForm/');
 }
 
+// view all employee page 
 module.exports.viewAllEmployee = async (req, res) => {
     const allEmp = await employee.find();
-    console.log(allEmp)
+    // console.log(allEmp)
     if (allEmp) {
         console.log("Employees data found...")
     }
@@ -29,4 +30,49 @@ module.exports.viewAllEmployee = async (req, res) => {
     }
 
     res.render('viewAllEmployee', { allEmp });
+}
+
+// edit employee
+module.exports.editEmp = async (req, res) => {
+    const findEmp = await employee.findById(req.params.id);
+    // console.log(findEmp);
+
+    // if employee data not found this boc will execute 
+    if (!findEmp) {
+        console.log("Employee not found");
+        return res.redirect('/viewAllEmployee');
+    }
+
+    // if employee data found this boc will execute 
+    console.log("Employee data found");
+    return res.render('empEditForm', { findEmp });
+}
+
+// update employee 
+module.exports.updateEmp = async (req, res) => {
+    // console.log(req.params);
+    const updatedEmp = await employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    console.log(updatedEmp);
+
+    if (!updatedEmp) {
+        console.log("Emp not updated");
+        return res.redirect('/editEmp');
+    }
+
+    console.log("Employee added successfully");
+    return res.redirect('/empForm/viewAllEmployee');
+}
+
+// delete employee logic 
+module.exports.deleteEmp = async (req, res) => {
+    // console.log(req.params.id);
+    const deletedUser = await employee.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+        console.log("User not deleted");
+        return res.redirect('/viewAllEmployee');
+    }
+
+    console.log("Employee deleted successfully");
+    return res.redirect('/empForm/viewAllEmployee');
 }

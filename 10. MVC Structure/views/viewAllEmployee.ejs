@@ -90,12 +90,16 @@
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn btn-edit" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="action-btn btn-delete" title="Delete">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                                    <a href="/empForm/editEmp/<%= emp.id %>">
+                                        <button class="action-btn btn-edit" title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </a>
+                                    <a href="/empForm/deleteEmp/<%= emp.id %>">
+                                        <button class="action-btn btn-delete" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

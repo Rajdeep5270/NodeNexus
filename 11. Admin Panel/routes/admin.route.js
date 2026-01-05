@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin } = require('../controller/admin.controller');
+const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin, editAdmin, updateAdmin } = require('../controller/admin.controller');
 
 const route = express.Router();
 
@@ -34,5 +34,9 @@ route.post('/addEmployee', uploads.single('profileImage'), addEmployeeDetails);
 
 // delete admin logic 
 route.get('/deleteAdmin/:id', deleteAdmin);
+
+// edit admin route
+route.get('/editAdmin/:id', editAdmin)
+route.post('/updateAdmin/:id', uploads.single('profileImage'), updateAdmin)
 
 module.exports = route;
