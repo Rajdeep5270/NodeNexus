@@ -1,22 +1,16 @@
 const admin = require('../models/admin.model');
-const cookie = require('cookie');
 const fs = require('fs');
 
-module.exports.loginPage = (req, res) => {
-    try {
-        if (!req.cookies) {
-            return res.render('auth/loginPage');
-        }
-    } catch (e) {
-        console.log("Admin Data Not Found");
-        console.log("Error : ", e);
-        res.redirect('/notFound');
+module.exports.loginPage = async (req, res) => {
+    const adminFound = await admin.findById(req.cookies.adminId);
+
+    if (req.cookies.adminId && adminFound) {
+        return res.redirect('/dashboardPage');
     }
+
+    return res.render('auth/loginPage');
 }
 
-module.exports.dashboardPage = (req, res) => {
-    return res.render('dashboard');
-}
 
 // admin login logic 
 module.exports.adminLogin = async (req, res) => {
@@ -48,8 +42,31 @@ module.exports.adminLogin = async (req, res) => {
     }
 }
 
+// admin logout logic 
+module.exports.logout = (req, res) => {
+    res.clearCookie('adminId');
+    res.redirect('/');
+}
+
+module.exports.dashboardPage = async (req, res) => {
+    const findAdmin = await admin.findById(req.cookies.adminId);
+
+    if (req.cookies.adminId == undefined && !findAdmin) {
+        return res.redirect('/');
+    }
+
+    return res.render('dashboard');
+}
+
+
 module.exports.viewAdminPage = async (req, res) => {
     try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
         const allAdminData = await admin.find();
 
         if (!allAdminData) {
@@ -67,7 +84,14 @@ module.exports.viewAdminPage = async (req, res) => {
     }
 }
 
-module.exports.addAdminFormPage = (req, res) => {
+// add admin form page rendering 
+module.exports.addAdminFormPage = async (req, res) => {
+    const findAdmin = await admin.findById(req.cookies.adminId);
+
+    if (req.cookies.adminId == undefined && !findAdmin) {
+        return res.redirect('/');
+    }
+
     return res.render('addForm');
 }
 

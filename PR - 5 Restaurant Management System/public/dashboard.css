@@ -136,6 +136,7 @@ body {
     border-bottom: 3px solid var(--primary);
 }
 
+
 .navbar-brand {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
@@ -391,6 +392,9 @@ body {
     }
 }
 
+
+
+
 /* FOOTER */
 .custom-footer {
     background: linear-gradient(135deg, #2d3436, #1e272e);
@@ -418,4 +422,9 @@ body {
 .custom-footer a:hover {
     color: var(--primary);
     transform: translateY(-2px);
+}
+
+/* food origin card  */
+.foodOriginCard {
+    text-decoration: none;
 }

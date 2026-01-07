@@ -36,7 +36,7 @@
             </button>
 
             <!-- Navigation Menu -->
-            <div class="collapse navbar-collapse py-4" id="navMenu">
+            <div class="collapse navbar-collapse py-2" id="navMenu">
                 <ul class="navbar-nav ms-auto align-items-center nav-menu">
 
                     <!-- Dashboard Link -->
@@ -45,15 +45,6 @@
                             href="/">
                             <i class="fas fa-chart-line"></i> Dashboard
                             <span class="nav-stats-badge">Today</span>
-                        </a>
-                    </li>
-
-                    <!-- Menu Link -->
-                    <li class="nav-item">
-                        <a class="nav-link <%= (typeof page !== 'undefined' && page === 'menu') ? 'active' : '' %>"
-                            href="#">
-                            <i class="fas fa-utensils"></i> Menu
-                            <span class="notification-dot"></span>
                         </a>
                     </li>
 
@@ -69,15 +60,6 @@
                             <li><a class="dropdown-item" href="/addRajasthaniDishPage">Rajasthani</a></li>
                             <li><a class="dropdown-item" href="/addSouthIndianDishPage">South Indian</a></li>
                         </ul>
-                    </li>
-
-                    <!-- Orders Link -->
-                    <li class="nav-item">
-                        <a class="nav-link <%= (typeof page !== 'undefined' && page === 'orders') ? 'active' : '' %>"
-                            href="#">
-                            <i class="fas fa-shopping-bag"></i> Orders
-                            <span class="nav-stats-badge">5 New</span>
-                        </a>
                     </li>
 
                     <!-- User Profile -->

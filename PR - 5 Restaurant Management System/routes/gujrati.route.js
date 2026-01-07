@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { addGujaratiDishPage, gujratiFoodViewPage, gujratiFoodEditPage, addGujratiDish, gujratiDishDelete, gujratiDishUpdate } = require('../controller/gujrati.controller');
+const { addGujaratiDishPage, gujratiFoodViewPage, gujratiFoodEditPage, addGujratiDish, gujratiDishDelete, gujratiDishUpdate, addToOrder } = require('../controller/gujrati.controller');
 
 const route = express.Router();
 
@@ -30,6 +30,6 @@ route.get('/gujratiFoodEditPage/:id', gujratiFoodEditPage);
 route.post('/gujratiDishUpdate/:id', uploads.single('dish_image'), gujratiDishUpdate)
 
 // gujrati dish delete logic 
-route.get('/gujratiDishDelete/:id', gujratiDishDelete)
+route.get('/gujratiDishDelete/:id', gujratiDishDelete);
 
 module.exports = route;
