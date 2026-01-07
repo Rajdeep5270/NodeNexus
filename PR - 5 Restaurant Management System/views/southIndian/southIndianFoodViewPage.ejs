@@ -1,168 +1,123 @@
 <%- include('../header') %>
 
-<div class="dashboard-container container-fluid">
+    <div class="dashboard-container container-fluid">
 
-    <!-- Hero Section -->
-    <section class="hero-section py-5">
-        <div class="dashboard-hero text-center mb-5">
-            <h1 class="display-5 fw-bold text-primary mb-3">South Indian Cuisine</h1>
-            <p class="lead text-muted max-width-600 mx-auto">
-                Savour the aromatic and spicy flavors of Southern India – rice-based, coconut-rich, and wholesome.
-            </p>
-        </div>
-    </section>
-
-    <!-- South Indian Dishes Grid -->
-    <section class="food-categories">
-        <div class="container">
-            <div class="row g-4 justify-content-center">
-
-                <!-- Dish 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card category-card shadow-lg border-0">
-                        <div class="category-img-container">
-                            <img src="https://images.unsplash.com/photo-1605478851326-9d8a2c78b942?auto=format&fit=crop&w=600&q=80"
-                                class="card-img-top" alt="Masala Dosa">
-                            <div class="category-overlay">
-                                <span class="badge bg-success text-dark">Classic</span>
-                            </div>
-                        </div>
-                        <div class="card-body text-center p-4">
-                            <div class="category-icon mb-3">
-                                <i class="fas fa-seedling fa-2x text-success"></i>
-                            </div>
-                            <h3 class="card-title fw-bold text-primary">Masala Dosa</h3>
-                            <p class="card-text text-muted">
-                                Crispy crepe filled with spiced potato masala, served with chutneys and sambar.
-                            </p>
-                            <span class="badge bg-light text-dark">₹150</span>
-                            <!-- Edit & Delete Buttons -->
-                            <div class="d-flex gap-2 justify-content-center mt-3">
-                                <a href="/addSouthIndianDishPage/southIndianFoodEditPage" class="btn btn-warning btn-sm text-white">
-                                    <i class="fa-solid fa-pen me-1"></i> Edit
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fa-solid fa-trash me-1"></i> Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dish 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card category-card shadow-lg border-0">
-                        <div class="category-img-container">
-                            <img src="https://images.unsplash.com/photo-1604908177686-8d9b0f2d0a8c?auto=format&fit=crop&w=600&q=80"
-                                class="card-img-top" alt="Idli">
-                            <div class="category-overlay">
-                                <span class="badge bg-warning text-dark">Steamed</span>
-                            </div>
-                        </div>
-                        <div class="card-body text-center p-4">
-                            <div class="category-icon mb-3">
-                                <i class="fas fa-leaf fa-2x text-warning"></i>
-                            </div>
-                            <h3 class="card-title fw-bold text-primary">Idli</h3>
-                            <p class="card-text text-muted">
-                                Soft steamed rice cakes, a healthy and classic breakfast staple.
-                            </p>
-                            <span class="badge bg-light text-dark">₹120</span>
-                            <!-- Edit & Delete Buttons -->
-                            <div class="d-flex gap-2 justify-content-center mt-3">
-                                <a href="/addSouthIndianDishPage/southIndianFoodEditPage" class="btn btn-warning btn-sm text-white">
-                                    <i class="fa-solid fa-pen me-1"></i> Edit
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fa-solid fa-trash me-1"></i> Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dish 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card category-card shadow-lg border-0">
-                        <div class="category-img-container">
-                            <img src="https://images.unsplash.com/photo-1605478851368-5b6c5f4c8d13?auto=format&fit=crop&w=600&q=80"
-                                class="card-img-top" alt="Vada">
-                            <div class="category-overlay">
-                                <span class="badge bg-success text-dark">Snack</span>
-                            </div>
-                        </div>
-                        <div class="card-body text-center p-4">
-                            <div class="category-icon mb-3">
-                                <i class="fas fa-utensils fa-2x text-success"></i>
-                            </div>
-                            <h3 class="card-title fw-bold text-primary">Vada</h3>
-                            <p class="card-text text-muted">
-                                Deep-fried savory lentil doughnuts, perfect with coconut chutney and sambar.
-                            </p>
-                            <span class="badge bg-light text-dark">₹130</span>
-                            <!-- Edit & Delete Buttons -->
-                            <div class="d-flex gap-2 justify-content-center mt-3">
-                                <a href="/addSouthIndianDishPage/southIndianFoodEditPage" class="btn btn-warning btn-sm text-white">
-                                    <i class="fa-solid fa-pen me-1"></i> Edit
-                                </a>
-                                <a href="" class="btn btn-danger btn-sm">
-                                    <i class="fa-solid fa-trash me-1"></i> Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <!-- Hero Section -->
+        <section class="hero-section py-5">
+            <div class="dashboard-hero text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">South Indian Cuisine</h1>
+                <p class="lead text-muted max-width-600 mx-auto">
+                    Savour the aromatic and spicy flavors of Southern India – rice-based, coconut-rich, and wholesome.
+                </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Stats Section -->
-    <div class="container-fluid">
-        <div class="row mt-5 pt-4">
-            <div class="col-12">
-                <div class="stats-container p-4 rounded-3 shadow-sm bg-light">
-                    <h4 class="text-center mb-4 fw-bold">South Indian Food Stats</h4>
-                    <div class="row text-center">
-                        <div class="col-md-4 col-6 mb-3">
-                            <div class="stat-item">
-                                <h2 class="display-6 fw-bold text-primary">18+</h2>
-                                <p class="text-muted">Traditional Dishes</p>
+        <!-- South Indian Dishes Grid -->
+        <section class="food-categories">
+            <div class="container">
+                <div class="row g-4 justify-content-center">
+
+                    <!-- Dish 1 -->
+                    <% dishFound.map(item=> { %>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card category-card shadow-lg border-0">
+                                <div class="category-img-container">
+                                    <img src="/<%= item.dish_image %>" class="card-img-top" alt="Masala Dosa">
+                                    <div class="category-overlay">
+                                        <span class="badge 
+                                            <%= item.dish_flavour === 'Spicy' ? 'bg-danger' :
+                                            item.dish_flavour === 'Sweet' ? 'bg-warning text-dark' :
+                                            item.dish_flavour === 'Tangy' ? 'bg-success' :
+                                            'bg-secondary' %>">
+                                            <%= item.dish_flavour %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center p-4">
+                                    <% const flavourIcons={ Spicy: { icon: "fa-pepper-hot" , color: "text-danger" },
+                                        Sweet: { icon: "fa-candy-cane" , color: "text-warning" }, Tangy: {
+                                        icon: "fa-lemon" , color: "text-success" }, Mild: { icon: "fa-leaf" ,
+                                        color: "text-primary" } }; const current=flavourIcons[item.dish_flavour] || {
+                                        icon: "fa-utensils" , color: "text-secondary" }; %>
+
+                                        <div class="category-icon mb-3">
+                                            <i class="fas <%= current.icon %> fa-2x <%= current.color %>"></i>
+                                        </div>
+                                        <h3 class="card-title fw-bold text-primary">
+                                            <%= item.dish_name %>
+                                        </h3>
+                                        <p class="card-text text-muted">
+                                            <%= item.dish_desc %>
+                                        </p>
+                                        <span class="badge bg-light text-dark">
+                                            ₹ <%= item.dish_price %>
+                                        </span>
+                                        <!-- Edit & Delete Buttons -->
+                                        <div class="d-flex gap-2 justify-content-center mt-3">
+                                            <a href="/addSouthIndianDishPage/southIndianFoodEditPage/<%= item.id %>"
+                                                class="btn btn-warning btn-sm text-white">
+                                                <i class="fa-solid fa-pen me-1"></i> Edit
+                                            </a>
+                                            <a href="/addSouthIndianDishPage/southIndianDishDelete/<%= item.id %>"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="fa-solid fa-trash me-1"></i> Delete
+                                            </a>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-6 mb-3">
-                            <div class="stat-item">
-                                <h2 class="display-6 fw-bold text-primary">100%</h2>
-                                <p class="text-muted">Authentic Taste</p>
+                        <% }) %>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <div class="container-fluid">
+            <div class="row mt-5 pt-4">
+                <div class="col-12">
+                    <div class="stats-container p-4 rounded-3 shadow-sm bg-light">
+                        <h4 class="text-center mb-4 fw-bold">South Indian Food Stats</h4>
+                        <div class="row text-center">
+                            <div class="col-md-4 col-6 mb-3">
+                                <div class="stat-item">
+                                    <h2 class="display-6 fw-bold text-primary">18+</h2>
+                                    <p class="text-muted">Traditional Dishes</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 col-6 mb-3">
-                            <div class="stat-item">
-                                <h2 class="display-6 fw-bold text-primary">Rice-Based</h2>
-                                <p class="text-muted">Healthy & Nutritious</p>
+                            <div class="col-md-4 col-6 mb-3">
+                                <div class="stat-item">
+                                    <h2 class="display-6 fw-bold text-primary">100%</h2>
+                                    <p class="text-muted">Authentic Taste</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 mb-3">
+                                <div class="stat-item">
+                                    <h2 class="display-6 fw-bold text-primary">Rice-Based</h2>
+                                    <p class="text-muted">Healthy & Nutritious</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- CTA Section -->
+        <div class="container-fluid">
+            <div class="row mt-5 p-0">
+                <div class="col-12 text-center">
+                    <div class="cta-section p-5 rounded-3 bg-primary text-white shadow">
+                        <h3 class="fw-bold mb-3">Savor the Southern Flavors</h3>
+                        <p class="mb-4">Order authentic South Indian dishes prepared with traditional recipes.</p>
+                        <a href="#" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-crown me-2"></i> Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- CTA Section -->
-    <div class="container-fluid">
-        <div class="row mt-5 p-0">
-            <div class="col-12 text-center">
-                <div class="cta-section p-5 rounded-3 bg-primary text-white shadow">
-                    <h3 class="fw-bold mb-3">Savor the Southern Flavors</h3>
-                    <p class="mb-4">Order authentic South Indian dishes prepared with traditional recipes.</p>
-                    <a href="#" class="btn btn-light btn-lg px-4">
-                        <i class="fas fa-crown me-2"></i> Order Now
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<%- include('../footer') %>
+    <%- include('../footer') %>

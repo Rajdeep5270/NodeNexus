@@ -1,8 +1,51 @@
 const admin = require('../models/admin.model');
+const cookie = require('cookie');
 const fs = require('fs');
+
+module.exports.loginPage = (req, res) => {
+    try {
+        if (!req.cookies) {
+            return res.render('auth/loginPage');
+        }
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
+}
 
 module.exports.dashboardPage = (req, res) => {
     return res.render('dashboard');
+}
+
+// admin login logic 
+module.exports.adminLogin = async (req, res) => {
+    try {
+        const adminFound = await admin.findOne({ email: req.body.email });
+
+        if (!adminFound) {
+            console.log("Admin not found...");
+            return res.redirect('/');
+        };
+
+        // for debugging 
+        // console.log(req.body.password);
+        // console.log(adminFound.password);
+
+        if (req.body.password !== adminFound.password) {
+            console.log("Password not match");
+            return res.redirect('/');
+        };
+
+        res.cookie("adminId", adminFound.id);
+
+        console.log("Admin login successfully...");
+        return res.redirect('/dashboardPage');
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
 }
 
 module.exports.viewAdminPage = async (req, res) => {

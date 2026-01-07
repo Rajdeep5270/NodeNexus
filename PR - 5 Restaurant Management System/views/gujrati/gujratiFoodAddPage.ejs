@@ -23,31 +23,47 @@
                         </div>
 
                         <!-- Form UI -->
-                        <form>
+                        <form method="post" action="/addGujratiDishPage/addGujratiDish" enctype="multipart/form-data">
 
                             <!-- Dish Name -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Dish Name</label>
-                                <input type="text" class="form-control" placeholder="e.g. Dhokla">
+                                <input type="text" class="form-control" placeholder="e.g. Dhokla" name="dish_name">
+                            </div>
+
+                            <!-- Dish Flavour  -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Flavour Type</label>
+                                <select class="form-select" name="dish_flavour" required>
+
+                                    <option value="" selected disabled>Select dish flavour</option>
+
+                                    <% ["Spicy", "Sweet" , "Salty" ].forEach(flavour=> { %>
+                                        <option value="<%= flavour %>">
+                                            <%= flavour %>
+                                        </option>
+                                        <% }) %>
+
+                                </select>
                             </div>
 
                             <!-- Price -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Price (₹)</label>
-                                <input type="number" class="form-control" placeholder="e.g. 120">
+                                <input type="number" class="form-control" placeholder="e.g. 120" name="dish_price">
                             </div>
 
                             <!-- Dish Image -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Dish Image</label>
-                                <input type="file" class="form-control">
+                                <input type="file" class="form-control" name="dish_image">
                             </div>
 
                             <!-- Description -->
                             <div class="mb-4">
                                 <label class="form-label fw-semibold">Description</label>
                                 <textarea class="form-control" rows="3"
-                                    placeholder="Short description about the Gujarati dish"></textarea>
+                                    placeholder="Short description about the Gujarati dish" name="dish_desc"></textarea>
                             </div>
 
                             <!-- Buttons -->
@@ -56,7 +72,7 @@
                                     <button type="button" class="btn btn-outline-secondary px-4">
                                         Cancel
                                     </button></a>
-                                <button type="button" class="btn btn-warning px-5 text-white">
+                                <button type="submit" class="btn btn-warning px-5 text-white">
                                     <i class="fa-solid fa-plus me-2"></i>Add Dish
                                 </button>
                             </div>

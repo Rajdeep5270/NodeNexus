@@ -1,11 +1,15 @@
 const express = require('express');
 
+// database connected
+require('./config/db.config');
+
 const PORT = 8080;
 
 const app = express();
 
 // view engine set to ejs to view design of website
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
 
 // route for main dashboard
 app.use('/', require('./routes/item.route'));

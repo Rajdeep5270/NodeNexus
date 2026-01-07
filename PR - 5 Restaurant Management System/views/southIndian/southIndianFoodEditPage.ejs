@@ -1,71 +1,83 @@
 <%- include('../header') %>
 
-<div class="dashboard-container container">
+    <div class="dashboard-container container">
 
-    <!-- Page Header -->
-    <div class="dashboard-hero text-center mb-5">
-        <h1 class="fw-bold">Edit South Indian Dish</h1>
-        <p class="text-muted max-width-600 mx-auto">
-            Update your South Indian favorites like Dosa, Idli, Vada & more.
-        </p>
-    </div>
+        <!-- Page Header -->
+        <div class="dashboard-hero text-center mb-5">
+            <h1 class="fw-bold">Edit South Indian Dish</h1>
+            <p class="text-muted max-width-600 mx-auto">
+                Update your South Indian favorites like Dosa, Idli, Vada & more.
+            </p>
+        </div>
 
-    <!-- Edit Dish Card -->
-    <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
+        <!-- Edit Dish Card -->
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
 
-            <div class="category-card bg-white p-4">
+                <div class="category-card bg-white p-4">
 
-                <!-- Icon -->
-                <div class="category-icon">
-                    <i class="fa-solid fa-bowl-food text-success fs-3"></i>
+                    <!-- Icon -->
+                    <div class="category-icon">
+                        <i class="fa-solid fa-bowl-food text-success fs-3"></i>
+                    </div>
+
+                    <!-- Form UI -->
+                    <form method="post" action="/addSouthIndianDishPage/southIndianDishUpdate/<%= editDish.id %>"
+                        enctype="multipart/form-data">
+
+                        <!-- Dish Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Dish Name</label>
+                            <input type="text" class="form-control" name="dish_name" value="<%= editDish.dish_name %>">
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Price (₹)</label>
+                            <input type="number" class="form-control" name="dish_price"
+                                value="<%= editDish.dish_price %>">
+                        </div>
+
+                        <!-- Dish Image -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Current Dish Image</label>
+
+                            <!-- Old Image Preview -->
+                            <div class="old-image-box text-center mb-2">
+                                <img src="/<%= editDish.dish_image %>" alt="Old Dish Image" class="old-dish-image">
+                            </div>
+
+                            <label class="form-label fw-semibold">New Dish Image</label>
+                            <input type="file" class="form-control" name="dish_image">
+                            <small class="text-muted">Choose a new image only if you want to change it</small>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Description</label>
+                            <textarea class="form-control" rows="3"
+                                name="dish_desc"><%= editDish.dish_desc %></textarea>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-3 justify-content-center">
+                            <a href="/addSouthIndianDishPage/southIndianFoodViewPage">
+                                <button type="button" class="btn btn-outline-secondary px-4">
+                                    Cancel
+                                </button>
+                            </a>
+                            <button type="submit" class="btn btn-success px-5 text-white">
+                                <i class="fa-solid fa-pen me-2"></i> Update Dish
+                            </button>
+                        </div>
+
+                    </form>
+
                 </div>
 
-                <!-- Form UI -->
-                <form>
-
-                    <!-- Dish Name -->
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Dish Name</label>
-                        <input type="text" class="form-control" value="Masala Dosa">
-                    </div>
-
-                    <!-- Price -->
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Price (₹)</label>
-                        <input type="number" class="form-control" value="150">
-                    </div>
-
-                    <!-- Dish Image -->
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Dish Image</label>
-                        <input type="file" class="form-control">
-                        <small class="text-muted">Current: masaladosa.jpg</small>
-                    </div>
-
-                    <!-- Description -->
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold">Description</label>
-                        <textarea class="form-control" rows="3">Crispy crepe filled with spiced potato masala, served with chutneys and sambar.</textarea>
-                    </div>
-
-                    <!-- Buttons -->
-                    <div class="d-flex gap-3 justify-content-center">
-                        <button type="button" class="btn btn-outline-secondary px-4">
-                            Cancel
-                        </button>
-                        <button type="button" class="btn btn-success px-5 text-white">
-                            <i class="fa-solid fa-pen me-2"></i> Update Dish
-                        </button>
-                    </div>
-
-                </form>
-
             </div>
-
         </div>
+
     </div>
 
-</div>
-
-<%- include('../footer') %>
+    <%- include('../footer') %>
