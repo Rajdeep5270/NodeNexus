@@ -51,18 +51,20 @@
                             <%= admin.hobbies %>
                         </p>
 
-                        <div class="admin-card-actions">
-                            <a href="/deleteAdmin/<%= admin.id %>">
-                                <button class="btn btn-primary">
-                                    <i class="fas fa-trash-alt"></i> Delete
-                                </button>
-                            </a>
-                            <a href="/editAdmin/<%= admin.id %>">
-                                <button class="btn btn-secondary">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-                            </a>
-                        </div>
+                        <% if(findAdmin.email==='rajdeepex5270@gmail.com' ) {%>
+                            <div class="admin-card-actions">
+                                <a href="/deleteAdmin/<%= admin.id %>">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </a>
+                                <a href="/editAdmin/<%= admin.id %>">
+                                    <button class="btn btn-secondary">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                </a>
+                            </div>
+                            <%}%>
                     </div>
                     <% }) %>
             </div>

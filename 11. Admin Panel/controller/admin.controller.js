@@ -1,16 +1,23 @@
 const admin = require('../models/admin.model');
 const fs = require('fs');
 
+// login page rendering 
 module.exports.loginPage = async (req, res) => {
-    const adminFound = await admin.findById(req.cookies.adminId);
+    try {
+        const adminFound = await admin.findById(req.cookies.adminId);
 
-    if (req.cookies.adminId && adminFound) {
-        return res.redirect('/dashboardPage');
+        if (req.cookies.adminId && adminFound) {
+            return res.redirect('/dashboardPage');
+        }
+
+        return res.render('auth/loginPage');
     }
-
-    return res.render('auth/loginPage');
+    catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
 }
-
 
 // admin login logic 
 module.exports.adminLogin = async (req, res) => {
@@ -48,17 +55,25 @@ module.exports.logout = (req, res) => {
     res.redirect('/');
 }
 
+// dashboard page rendering 
 module.exports.dashboardPage = async (req, res) => {
-    const findAdmin = await admin.findById(req.cookies.adminId);
+    try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
 
-    if (req.cookies.adminId == undefined && !findAdmin) {
-        return res.redirect('/');
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
+        return res.render('dashboard', { findAdmin });
+
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
     }
-
-    return res.render('dashboard');
 }
 
-
+// view admin page 
 module.exports.viewAdminPage = async (req, res) => {
     try {
         const findAdmin = await admin.findById(req.cookies.adminId);
@@ -67,7 +82,10 @@ module.exports.viewAdminPage = async (req, res) => {
             return res.redirect('/');
         }
 
-        const allAdminData = await admin.find();
+        let allAdminData = await admin.find();
+
+        // if some one login his data not be shown here logic 
+        allAdminData = allAdminData.filter(subAdmin => subAdmin.email != findAdmin.email)
 
         if (!allAdminData) {
             console.log("Admin Data Not Found");
@@ -75,7 +93,7 @@ module.exports.viewAdminPage = async (req, res) => {
         }
 
         console.log("Admin Data Found")
-        return res.render('viewAll', { allAdminData });
+        return res.render('viewAll', { allAdminData, findAdmin });
 
     } catch (e) {
         console.log("Admin Data Not Found");
@@ -86,13 +104,20 @@ module.exports.viewAdminPage = async (req, res) => {
 
 // add admin form page rendering 
 module.exports.addAdminFormPage = async (req, res) => {
-    const findAdmin = await admin.findById(req.cookies.adminId);
+    try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
 
-    if (req.cookies.adminId == undefined && !findAdmin) {
-        return res.redirect('/');
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
+        return res.render('addForm', { findAdmin });
+
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
     }
-
-    return res.render('addForm');
 }
 
 // error page rendering 
@@ -147,10 +172,17 @@ module.exports.deleteAdmin = async (req, res) => {
 
 //edit admin logic 
 module.exports.editAdmin = async (req, res) => {
-    // console.log(req.params);
-    const editAdmin = await admin.findById(req.params.id);
+    try {
+        // console.log(req.params);
+        const editAdmin = await admin.findById(req.params.id);
 
-    res.render('editForm', { editAdmin });
+        res.render('editForm', { editAdmin });
+
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
 }
 
 // update admin logic
