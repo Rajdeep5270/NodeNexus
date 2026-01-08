@@ -17,56 +17,69 @@
             <div class="container">
                 <div class="row g-4 justify-content-center">
 
-                    <!-- Dish 1 -->
-                    <% dishFound.map(item=> { %>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card category-card shadow-lg border-0">
-                                <div class="category-img-container">
-                                    <img src="/<%= item.dish_image %>" class="card-img-top" alt="Masala Dosa">
-                                    <div class="category-overlay">
-                                        <span class="badge 
+                    <% if (dishFound && dishFound.length> 0) { %>
+
+                        <!-- Dish 1 -->
+                        <% dishFound.map(item=> { %>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card category-card shadow-lg border-0">
+                                    <div class="category-img-container">
+                                        <img src="/<%= item.dish_image %>" class="card-img-top" alt="Masala Dosa">
+                                        <div class="category-overlay">
+                                            <span class="badge 
                                             <%= item.dish_flavour === 'Spicy' ? 'bg-danger' :
                                             item.dish_flavour === 'Sweet' ? 'bg-warning text-dark' :
                                             item.dish_flavour === 'Tangy' ? 'bg-success' :
                                             'bg-secondary' %>">
-                                            <%= item.dish_flavour %>
-                                        </span>
+                                                <%= item.dish_flavour %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center p-4">
+                                        <% const flavourIcons={ Spicy: { icon: "fa-pepper-hot" , color: "text-danger" },
+                                            Sweet: { icon: "fa-candy-cane" , color: "text-warning" }, Tangy: {
+                                            icon: "fa-lemon" , color: "text-success" }, Mild: { icon: "fa-leaf" ,
+                                            color: "text-primary" } }; const current=flavourIcons[item.dish_flavour] ||
+                                            { icon: "fa-utensils" , color: "text-secondary" }; %>
+
+                                            <div class="category-icon mb-3">
+                                                <i class="fas <%= current.icon %> fa-2x <%= current.color %>"></i>
+                                            </div>
+                                            <h3 class="card-title fw-bold text-primary">
+                                                <%= item.dish_name %>
+                                            </h3>
+                                            <p class="card-text text-muted">
+                                                <%= item.dish_desc %>
+                                            </p>
+                                            <span class="badge bg-light text-dark">
+                                                ₹ <%= item.dish_price %>
+                                            </span>
+                                            <!-- Edit & Delete Buttons -->
+                                            <div class="d-flex gap-2 justify-content-center mt-3">
+                                                <a href="/addSouthIndianDishPage/southIndianFoodEditPage/<%= item.id %>"
+                                                    class="btn btn-warning btn-sm text-white">
+                                                    <i class="fa-solid fa-pen me-1"></i> Edit
+                                                </a>
+                                                <a href="/addSouthIndianDishPage/southIndianDishDelete/<%= item.id %>"
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="fa-solid fa-trash me-1"></i> Delete
+                                                </a>
+                                            </div>
                                     </div>
                                 </div>
-                                <div class="card-body text-center p-4">
-                                    <% const flavourIcons={ Spicy: { icon: "fa-pepper-hot" , color: "text-danger" },
-                                        Sweet: { icon: "fa-candy-cane" , color: "text-warning" }, Tangy: {
-                                        icon: "fa-lemon" , color: "text-success" }, Mild: { icon: "fa-leaf" ,
-                                        color: "text-primary" } }; const current=flavourIcons[item.dish_flavour] || {
-                                        icon: "fa-utensils" , color: "text-secondary" }; %>
-
-                                        <div class="category-icon mb-3">
-                                            <i class="fas <%= current.icon %> fa-2x <%= current.color %>"></i>
-                                        </div>
-                                        <h3 class="card-title fw-bold text-primary">
-                                            <%= item.dish_name %>
-                                        </h3>
-                                        <p class="card-text text-muted">
-                                            <%= item.dish_desc %>
-                                        </p>
-                                        <span class="badge bg-light text-dark">
-                                            ₹ <%= item.dish_price %>
-                                        </span>
-                                        <!-- Edit & Delete Buttons -->
-                                        <div class="d-flex gap-2 justify-content-center mt-3">
-                                            <a href="/addSouthIndianDishPage/southIndianFoodEditPage/<%= item.id %>"
-                                                class="btn btn-warning btn-sm text-white">
-                                                <i class="fa-solid fa-pen me-1"></i> Edit
-                                            </a>
-                                            <a href="/addSouthIndianDishPage/southIndianDishDelete/<%= item.id %>"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="fa-solid fa-trash me-1"></i> Delete
-                                            </a>
-                                        </div>
-                                </div>
                             </div>
-                        </div>
-                        <% }) %>
+                            <% }) %>
+
+                                <% } else { %>
+
+                                    <!-- No Dishes Message -->
+                                    <div class="col-12 text-center mt-5">
+                                        <h3 class="text-muted fw-bold">No dishes available 🍽️</h3>
+                                        <p class="text-secondary">Please add some South Indian dishes to display here.
+                                        </p>
+                                    </div>
+
+                                    <% } %>
 
                 </div>
             </div>
@@ -81,7 +94,9 @@
                         <div class="row text-center">
                             <div class="col-md-4 col-6 mb-3">
                                 <div class="stat-item">
-                                    <h2 class="display-6 fw-bold text-primary">18+</h2>
+                                    <h2 class="display-6 fw-bold text-primary">
+                                        <%= dishFound.length%>+
+                                    </h2>
                                     <p class="text-muted">Traditional Dishes</p>
                                 </div>
                             </div>
