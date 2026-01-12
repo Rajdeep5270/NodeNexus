@@ -1,0 +1,46 @@
+<%- include('header') %>
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Share a Tale of Valor</h2>
+                <p>Your words keep the spirit of our heroes alive.</p>
+            </div>
+
+            <form action="#">
+                <div class="input-group">
+                    <label>Story Title</label>
+                    <input type="text" placeholder="e.g., The Tiger of Rezang La" required />
+                </div>
+
+                <div class="input-group">
+                    <label>Category Tag</label>
+                    <select>
+                        <option>Gallantry</option>
+                        <option>Life at Border</option>
+                        <option>Sacrifice</option>
+                        <option>Inspiration</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Upload Cover Image</label>
+                    <div class="file-upload">
+                        <input type="file" id="file-input" />
+                        <label for="file-input">Click to upload a respectful image</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>The Story</label>
+                    <textarea rows="10" placeholder="Start writing your tribute here..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-hero">Publish Gatha</button>
+                    <a href="/" class="btn-secondary">Return to Home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('footer') %>

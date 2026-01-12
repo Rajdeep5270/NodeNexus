@@ -5,6 +5,7 @@ const app = express();
 const PORT = 8080;
 app.set('view engine', 'ejs');
 app.use('/', require('./routes/route'));
+app.use(express.static(__dirname));
 
 
 // server started 

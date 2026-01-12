@@ -1,0 +1,517 @@
+:root {
+  --primary: #2f4f3a;
+  --accent: #ff9933;
+  --soft-gold: #fdf5e6;
+  /* Warmer background */
+  --dark: #0f1a14;
+  --light: #fbfaf8;
+  --white: #fff;
+  --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--light);
+  color: #333;
+  line-height: 1.6;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- HEADER --- */
+header {
+  background: var(--white);
+  /* White header for a cleaner look */
+  color: var(--dark);
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+nav a {
+  color: var(--dark);
+  margin-left: 30px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+/* LOGIN BUTTON STYLES */
+.btn-login {
+  background: var(--accent);
+  color: white !important;
+  /* Overriding nav a color */
+  padding: 10px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(255, 153, 51, 0.3);
+}
+
+/* Hover Animation: Lift and Glow */
+.btn-login:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 153, 51, 0.5);
+  letter-spacing: 2px;
+  /* Subtle expansion */
+}
+
+/* Active Animation: Click effect */
+.btn-login:active {
+  transform: translateY(0);
+}
+
+/* Heartful Shimmer Effect */
+.btn-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transition: all 0.6s;
+}
+
+.btn-login:hover::before {
+  left: 100%;
+}
+
+/* Breathing Animation (Optional) */
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Apply breathing to the button so it feels "alive" even when not hovered */
+.btn-login {
+  animation: breathing 3s infinite ease-in-out;
+}
+
+/* --- HERO --- */
+.hero {
+  height: 80vh;
+  background:
+    linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent),
+    url("https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?auto=format&fit=crop&w=1600");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 0 10%;
+  color: white;
+  border-bottom-left-radius: 100px;
+  /* Heartful, soft curve */
+}
+
+.hero-content {
+  max-width: 650px;
+  animation: fadeInUp 1s ease-out;
+  /* Hero entrance animation */
+}
+
+.hero h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.hero button {
+  margin-top: 30px;
+  padding: 16px 40px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 10px 20px rgba(255, 153, 51, 0.3);
+}
+
+.hero button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 25px rgba(255, 153, 51, 0.4);
+}
+
+/* HERO BUTTON STYLES */
+.btn-hero {
+  margin-top: 30px;
+  padding: 18px 45px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 0 0 0 rgba(255, 153, 51, 0.7);
+  /* Base for pulse */
+  animation: heroPulse 2.5s infinite;
+  /* The "Heartbeat" effect */
+}
+
+/* Hover: The button expands and the color deepens slightly */
+.btn-hero:hover {
+  transform: scale(1.05) translateY(-3px);
+  background: #e68a00;
+  /* Slightly darker shade of accent */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1.5px;
+}
+
+/* The Shine Effect (Matching your Login button) */
+.btn-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: 0.5s;
+}
+
+.btn-hero:hover::after {
+  left: 100%;
+}
+
+/* HEARTBEAT PULSE ANIMATION */
+@keyframes heroPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 153, 51, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 153, 51, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 153, 51, 0);
+  }
+}
+
+/* --- BLOG SECTION --- */
+.section {
+  padding: 100px 8%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: var(--primary);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent);
+  margin: 15px auto;
+  border-radius: 2px;
+}
+
+/* --- CARD DESIGN --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  /* More rounded for softness */
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+  /* Gentle zoom on hover */
+}
+
+.card-body {
+  padding: 30px;
+}
+
+.tag {
+  background: var(--soft-gold);
+  color: #d88122;
+  padding: 5px 15px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  border-radius: 50px;
+}
+
+.card h3 {
+  margin: 15px 0 10px;
+  color: var(--dark);
+}
+
+.read {
+  margin-top: 20px;
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.read:hover {
+  border-bottom: 2px solid var(--accent);
+  letter-spacing: 1px;
+}
+
+/* --- FOOTER --- */
+footer {
+  background: var(--primary);
+  color: white;
+  padding: 60px 20px;
+  border-top-right-radius: 100px;
+  /* Soft upward curve */
+}
+
+/* FORM PAGE STYLES */
+.form-container {
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f6f7f8 0%, #edeef0 100%);
+}
+
+.form-card {
+  background: white;
+  width: 100%;
+  max-width: 700px;
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h2 {
+  color: var(--primary);
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.form-header p {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* INPUT STYLING */
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+  background: #fafafa;
+}
+
+/* The "Heartful" Focus State */
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: white;
+  box-shadow: 0 5px 15px rgba(255, 153, 51, 0.1);
+}
+
+/* FILE UPLOAD BOX */
+.file-upload {
+  border: 2px dashed #ddd;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.file-upload:hover {
+  border-color: var(--accent);
+  background: var(--soft-gold);
+}
+
+.file-upload input {
+  display: none;
+}
+
+/* Button Group Container */
+.button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Dono buttons ko barabar jagah milegi */
+  gap: 15px;
+  /* Beech ka gap */
+  margin-top: 30px;
+  align-items: center;
+}
+
+/* Base style for both buttons to look uniform */
+.btn-hero,
+.btn-secondary {
+  width: 100%;
+  text-align: center;
+  padding: 16px 20px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/* Primary Button (Publish) */
+.btn-hero {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 10px 20px rgba(255, 153, 51, 0.2);
+}
+
+/* Secondary Button (Return) - Heartful and Simple */
+.btn-secondary {
+  background: #f0f0f0;
+  /* Soft gray */
+  color: #666;
+}
+
+.btn-secondary:hover {
+  background: #e5e5e5;
+  color: var(--dark);
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive: Choti screen pe buttons ek ke upar ek ho jayenge */
+@media (max-width: 480px) {
+  .button-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* BACK LINK */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #888;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  color: var(--primary);
+}
