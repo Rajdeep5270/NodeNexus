@@ -1,0 +1,87 @@
+<%- include('../header') %>
+
+    <main class="main-content">
+        <div class="content-header">
+            <h1>Admin Profile</h1>
+            <p>Full account details for <%= findAdmin.firstName %>
+                    <%= findAdmin.lastName %>
+            </p>
+        </div>
+
+        <div class="card form-card" style="max-width: 100%; margin: 0 auto;">
+
+            <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <div class="admin-avatar" style="margin: 0;">
+                    <img src="<%= findAdmin.profileImage %>" alt="Profile Image">
+                </div>
+                <div>
+                    <h2 class="admin-title" style="font-size: 2rem; margin-bottom: 0.2rem;">
+                        <%= findAdmin.firstName %>
+                            <%= findAdmin.lastName %>
+                    </h2>
+                    <span class="admin-index" style="font-size: 1.1rem; color: var(--primary-color);">
+                        <i class="fas fa-user-shield"></i> System Administrator
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <p><strong>
+                            <%= findAdmin.email %>
+                        </strong></p>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Phone Number</label>
+                    <p><strong>
+                            <%= findAdmin.phone %>
+                        </strong></p>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> Gender</label>
+                    <p><strong>
+                            <%= findAdmin.gender %>
+                        </strong></p>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> City / Location</label>
+                    <p><strong>
+                            <%= findAdmin.city %>
+                        </strong></p>
+                </div>
+
+                <div class="form-group full-width">
+                    <label><i class="fas fa-heart"></i> Hobbies</label>
+                    <div class="checkbox-group" style="margin-top: 0.5rem;">
+                        <% findAdmin.hobbies.forEach(hobby=> { %>
+                            <div class="checkbox-card" style="cursor: default; background: rgba(67, 97, 238, 0.05);">
+                                <%= hobby %>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label><i class="fas fa-info-circle"></i> About / Bio</label>
+                    <p
+                        style="background: var(--light-color); padding: 1rem; border-radius: var(--border-radius); border-left: 4px solid var(--primary-color);">
+                        <%= findAdmin.about %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-actions" style="border-top: 1px solid #eee; padding-top: 1.5rem;">
+                <a href="/editAdmin/<%= findAdmin.id %>" class="btn btn-primary">
+                    <i class="fas fa-user-edit"></i> Edit Profile Information
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../footer') %>

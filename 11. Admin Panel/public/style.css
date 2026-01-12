@@ -20,6 +20,15 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
 body {
     background-color: #f5f7fb;
     color: #333;
@@ -877,3 +886,16 @@ body {
 }
 
 /* <================view Page css ends here===================> */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+}

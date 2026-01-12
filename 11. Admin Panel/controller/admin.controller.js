@@ -49,6 +49,85 @@ module.exports.adminLogin = async (req, res) => {
     }
 }
 
+// change password page rendering
+module.exports.changePasswordPage = async (req, res) => {
+    try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
+        return res.render('auth/changePasswordPage', { findAdmin });
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
+}
+
+// change password logic 
+module.exports.changePassword = async (req, res) => {
+    try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
+        console.log(req.body);
+
+        const { curr_pass, new_pass, conf_pass } = req.body;
+
+        if (curr_pass != findAdmin.password) {
+            console.log("Current password in wrong.");
+            return res.redirect('/changePasswordPage');
+        }
+
+        if (new_pass == findAdmin.password) {
+            console.log("New and old password are same.");
+            return res.redirect('/changePasswordPage');
+        }
+
+        if (new_pass != conf_pass) {
+            console.log("New password and confirm password not matched");
+            return res.redirect('/changePasswordPage');
+        }
+
+        const changedPassword = await admin.findByIdAndUpdate(findAdmin.id, { password: conf_pass }, { new: true });
+
+        if (!changedPassword) {
+            console.log("Password not changed");
+            return res.redirect('/changePasswordPage');
+        }
+
+        console.log("Password is Changed");
+        res.clearCookie('adminId');
+        return res.redirect('/');
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
+}
+
+// admin page 
+module.exports.profilePage = async (req, res) => {
+    try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
+        return res.render('profile/profilePage', { findAdmin });
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
+}
+
 // admin logout logic 
 module.exports.logout = (req, res) => {
     res.clearCookie('adminId');
@@ -173,10 +252,15 @@ module.exports.deleteAdmin = async (req, res) => {
 //edit admin logic 
 module.exports.editAdmin = async (req, res) => {
     try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
         // console.log(req.params);
         const editAdmin = await admin.findById(req.params.id);
 
-        res.render('editForm', { editAdmin });
+        res.render('editForm', { editAdmin, findAdmin });
 
     } catch (e) {
         console.log("Admin Data Not Found");
@@ -190,6 +274,13 @@ module.exports.updateAdmin = async (req, res) => {
     try {
         // console.log(req.file);
         if (req.file) {
+            const findAdmin = await admin.findById(req.cookies.adminId);
+            // console.log(findAdmin);
+
+            // if (req.cookies.adminId == undefined && !findAdmin) {
+            //     return res.redirect('/');
+            // }
+
             console.log(req.file.path);
             req.body.profileImage = req.file.path;
 
@@ -202,14 +293,24 @@ module.exports.updateAdmin = async (req, res) => {
                 return res.redirect('/editAdmin')
             }
 
+            if (updatedAdmin.id == findAdmin.id) {
+                return res.redirect('/profile');
+            }
+
             console.log("Admin updated successfully");
         }
         else {
+            const findAdmin = await admin.findById(req.cookies.adminId);
+
             const updatedAdmin = await admin.findByIdAndUpdate(req.params.id, req.body);
 
             if (!updatedAdmin) {
                 console.log("Admin not updated");
                 return res.redirect('/editAdmin')
+            }
+
+            if (updatedAdmin.id == findAdmin.id) {
+                return res.redirect('/profile');
             }
 
             console.log("Admin updated successfully");

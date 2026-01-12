@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin, editAdmin, updateAdmin, loginPage, adminLogin, logout } = require('../controller/admin.controller');
+const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin, editAdmin, updateAdmin, loginPage, adminLogin, logout, changePasswordPage, changePassword, profilePage } = require('../controller/admin.controller');
 
 const route = express.Router();
 
@@ -10,8 +10,16 @@ route.get('/', loginPage);
 // admin login logic 
 route.post('/login', adminLogin);
 
+// change password page rendering 
+route.get('/changePasswordPage', changePasswordPage);
+
+// change password logic 
+route.post('/changePassword', changePassword);
+
 // admin logout logic 
 route.get('/logout', logout);
+
+route.get('/profile', profilePage);
 
 // route for dashboard or home page 
 route.get('/dashboardPage', dashboardPage);
