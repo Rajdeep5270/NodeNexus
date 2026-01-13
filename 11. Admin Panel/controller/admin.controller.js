@@ -1,5 +1,6 @@
 const admin = require('../models/admin.model');
 const fs = require('fs');
+const nodemailer = require('nodemailer');
 
 // login page rendering 
 module.exports.loginPage = async (req, res) => {
@@ -126,6 +127,48 @@ module.exports.profilePage = async (req, res) => {
         console.log("Error : ", e);
         res.redirect('/notFound');
     }
+}
+
+// verify email logic 
+module.exports.verifyEmail = async (req, res) => {
+    try {
+        const adminVerify = await admin.findOne(req.body);
+
+        if (!adminVerify) {
+            console.log("Admin not found...");
+            return res.redirect('/');
+        }
+
+        // console.log(adminVerify);
+
+    } catch (e) {
+        console.log("Admin Data Not Found");
+        console.log("Error : ", e);
+        res.redirect('/notFound');
+    }
+    // console.log(req.body);
+
+    // send otp logic 
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: "rajdeep11559@gmail.com",
+            pass: "pumgraithtnfqdgy"
+        }
+    });
+
+    const OTP = Math.floor(100000 + Math.random() * 900000);
+
+    // email transporter 
+    const info = await transporter.sendMail({
+        from: 'Admin Panel <rajdeep11559@gmail.com>',
+        to: req.body.email,
+        subject: 'Admin Panel OTP Testing',
+        html: `<h2 style:color='red'>OTP : ${OTP}</h2>`
+    })
+
+    console.log(info.messageId);
+    return res.redirect('/');
 }
 
 // admin logout logic 
