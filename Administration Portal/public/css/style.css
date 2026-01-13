@@ -1,0 +1,197 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&family=JetBrains+Mono&display=swap');
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #020617;
+    color: white;
+    overflow-y: scroll;
+    /* Screen se bahar scroll nahi hoga */
+}
+
+/* Background Canvas setup */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    /* ❗ important */
+}
+
+/* Glassmorphism Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border 0.3s ease; */
+}
+
+/* Glass container ko thoda adjust karein taaki scroll smoothly chale */
+.glass-container {
+    height: auto;
+    /* full content ke liye grow kare */
+    overflow: auto;
+    /* scroll body pe hoga */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(59, 130, 246, 0.5) transparent;
+    padding: 1rem;
+}
+
+/* Scrollbar styling for Chrome/Safari */
+.glass-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.glass-container::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.5);
+    border-radius: 10px;
+}
+
+/* Sidebar Specific Styles */
+.nav-btn {
+    border-left: 0px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 4px solid var(--accent-blue);
+    padding-left: 1.5rem;
+    /* Hover par text thoda move hoga */
+}
+
+/* Font styles */
+h1,
+h2,
+h3 {
+    letter-spacing: -0.05em;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbar (agar content zyada ho jaye) */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* Layout helper */
+.sidebar-anim,
+.header-anim,
+.content-anim {
+    will-change: transform, opacity;
+}
+
+/* Glow Effect for Active Elements */
+.glow-text {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Peer classes handle the "checked" state visually */
+input[type="radio"]:checked+div {
+    border-color: #3b82f6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Specific purple glow for female selection */
+input[value="female"]:checked+div {
+    border-color: #a855f7;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+/* Checkbox Selection Anim */
+input[type="checkbox"]:checked+div {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Specific border colors for different hobbies */
+input[value="sports"]:checked+div {
+    border-color: #10b981;
+}
+
+input[value="music"]:checked+div {
+    border-color: #a855f7;
+}
+
+input[value="gaming"]:checked+div {
+    border-color: #f97316;
+}
+
+/* Textarea ki scrollbar ko clean banane ke liye */
+.scroll-custom::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 10px;
+}
+
+/* Placeholder color */
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+#drop-zone {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#image-preview {
+    pointer-events: none;
+    /* User preview ke upar click kare toh bhi input trigger ho */
+}
+
+/* Hover par icon thoda bounce karega */
+#drop-zone:hover i {
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
+}
