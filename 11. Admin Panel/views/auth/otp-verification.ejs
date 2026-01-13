@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/public/style.css">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f6f9;
+        }
+
+        .verify-card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+
+        .otp-input {
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card form-card verify-card">
+        <h3><i class="fas fa-shield-alt"></i> Verify OTP</h3>
+
+        <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+            Enter the 6-digit OTP sent to your email
+        </p>
+
+        <!-- OTP VERIFICATION FORM -->
+        <form method="POST" action="" class="employee-form">
+
+            <div class="form-group">
+                <label>OTP Code</label>
+                <input type="text" name="otp" class="otp-input" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check-circle"></i> Verify OTP
+                </button>
+            </div>
+
+            <a href="/">
+                <button type="button" class="link-btn">
+                    ← Back to Login
+                </button>
+            </a>
+
+            <button type="button" class="link-btn" onclick="window.location.href='/verify-email'">
+                Resend OTP
+            </button>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
