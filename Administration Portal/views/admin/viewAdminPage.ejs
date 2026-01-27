@@ -1,0 +1,73 @@
+<%- include('../header') %>
+
+    <main>
+        <div class="glass-container glass rounded-[2.5rem] p-8 content-anim">
+            <h2 class="text-3xl font-black mb-10 text-center tracking-tighter text-white">
+                VIEW <span class="text-blue-500">ADMIN</span>
+            </h2>
+
+            <!-- Admin Card -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 my-8">
+
+                <!-- Profile Section -->
+                <div class="glass rounded-[2rem] p-6 flex flex-col items-center text-center">
+                    <img src="/uploads/admin.jpg"
+                        class="w-32 h-32 rounded-full object-cover border-4 border-blue-500/40 mb-4">
+                    <h3 class="text-xl font-bold">Rajdeep Singh</h3>
+                    <p class="text-sm text-gray-400">Super Admin</p>
+
+                    <div class="mt-4 flex gap-3">
+                        <span class="px-4 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs">Male</span>
+                        <span class="px-4 py-1 rounded-full bg-green-500/20 text-green-400 text-xs">Active</span>
+                    </div>
+                </div>
+
+                <!-- Admin Details -->
+                <div class="lg:col-span-2 glass rounded-[2rem] p-8 space-y-6">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-blue-400">Email</p>
+                            <p class="mt-1 text-sm">rajdeep@gmail.com</p>
+                        </div>
+
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-blue-400">Phone</p>
+                            <p class="mt-1 text-sm">+91 98765 43210</p>
+                        </div>
+
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-blue-400">City</p>
+                            <p class="mt-1 text-sm">Amritsar</p>
+                        </div>
+
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-blue-400">Joined On</p>
+                            <p class="mt-1 text-sm">12 Jan 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- About -->
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-blue-400 mb-2">Biography</p>
+                        <p class="text-sm leading-relaxed text-gray-300">
+                            Responsible for managing platform admins, monitoring system activity, and ensuring security
+                            compliance across the application.
+                        </p>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-4 pt-4">
+                        <a href="/admin/edit"
+                            class="flex-1 text-center bg-purple-600 hover:bg-purple-500 py-3 rounded-xl font-bold transition-all">Edit
+                            Admin</a>
+                        <button
+                            class="flex-1 bg-red-600/20 hover:bg-red-600/40 border border-red-500/30 py-3 rounded-xl font-bold text-red-400 transition-all">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <%- include('../footer') %>

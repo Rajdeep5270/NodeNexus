@@ -22,6 +22,11 @@ body {
     /* Screen se bahar scroll nahi hoga */
 }
 
+main {
+    height: 100vh;
+}
+
+
 /* Background Canvas setup */
 #bg-canvas {
     position: fixed;

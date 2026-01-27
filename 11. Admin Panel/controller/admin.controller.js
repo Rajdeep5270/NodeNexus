@@ -186,6 +186,7 @@ module.exports.verifyEmail = async (req, res) => {
     `
     });
 
+    res.cookie("OTP", OTP);
     // console.log(info.messageId);
     return res.render('auth/otp-verification', { OTP });
 }

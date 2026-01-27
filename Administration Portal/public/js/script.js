@@ -160,49 +160,6 @@ const hiddenInput = document.getElementById('city-input');
 
 let isOpen = false;
 
-// Toggle Dropdown
-dropdown.addEventListener('click', () => {
-    isOpen = !isOpen;
-
-    if (isOpen) {
-        gsap.to(optionsMenu, { autoAlpha: 1, scale: 1, y: 5, duration: 0.4, ease: "power3.out" });
-        gsap.to(icon, { rotation: 180, duration: 0.3 });
-    } else {
-        gsap.to(optionsMenu, { autoAlpha: 0, scale: 0.95, y: 0, duration: 0.3, ease: "power3.in" });
-        gsap.to(icon, { rotation: 0, duration: 0.3 });
-    }
-});
-
-// Select Option Logic
-document.querySelectorAll('.city-opt').forEach(option => {
-    option.addEventListener('click', function () {
-        const value = this.getAttribute('data-value');
-
-        // Update UI
-        selectedText.innerText = value;
-        selectedText.classList.remove('text-gray-300');
-        selectedText.classList.add('text-blue-400', 'font-bold');
-        hiddenInput.value = value;
-
-        // Close Menu
-        isOpen = false;
-        gsap.to(optionsMenu, { autoAlpha: 0, scale: 0.95, duration: 0.3 });
-        gsap.to(icon, { rotation: 0, duration: 0.3 });
-
-        // Success Pulse Animation
-        gsap.fromTo(dropdown, { borderColor: "#3b82f6" }, { borderColor: "rgba(255,255,255,0.1)", duration: 1 });
-    });
-});
-
-// Close when clicking outside
-window.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target) && !optionsMenu.contains(e.target)) {
-        isOpen = false;
-        gsap.to(optionsMenu, { autoAlpha: 0, scale: 0.95, duration: 0.3 });
-        gsap.to(icon, { rotation: 0, duration: 0.3 });
-    }
-});
-
 const textarea = document.getElementById('admin-about');
 const charDisplay = document.getElementById('char-count');
 const glowEffect = document.getElementById('textarea-glow');

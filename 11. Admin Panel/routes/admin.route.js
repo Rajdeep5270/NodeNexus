@@ -1,5 +1,6 @@
 const express = require('express');
-const multer = require('multer');
+const uploads = require('../middleware/multer.middleware');
+
 const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin, editAdmin, updateAdmin, loginPage, adminLogin, logout, changePasswordPage, changePassword, profilePage, verifyEmail } = require('../controller/admin.controller');
 
 const route = express.Router();
@@ -35,19 +36,6 @@ route.get('/addAdminFormPage', addAdminFormPage);
 
 // route for error 
 route.get('/notFound', addAdminFormPage);
-
-// image storation process in uploads/admin folder
-const storage = multer.diskStorage({
-    destination: ((req, file, cb) => {
-        cb(null, "uploads/admin/");
-    }),
-
-    filename: ((req, file, cb) => {
-        cb(null, Date.now() + " - " + file.originalname);
-    })
-});
-
-const uploads = multer({ storage });
 
 // route for add employee 
 route.post('/addEmployee', uploads.single('profileImage'), addEmployeeDetails);
