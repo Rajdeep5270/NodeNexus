@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const URI = "mongodb://localhost:27017/Admin-Management-Panel-Using-Session";
+const URI = "mongodb://localhost:27017/Admin-Management-Panel";
 
 mongoose.connect(URI).then(() => {
     console.log("Database is connected...");

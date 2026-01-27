@@ -1,0 +1,16 @@
+{
+    "firstName": "Rajdeep",
+    "lastName": "Singh",
+    "email": "rajdeep.singh@example.com",
+    "password": "Rajdeep@123",
+    "phone": "9876543210",
+    "gender": "Male",
+    "hobbies": [
+        "Coding",
+        "Reading",
+        "Music"
+    ],
+    "city": "Delhi",
+    "about": "Full stack developer with interest in backend and databases.",
+    "profileImage": "https://example.com/uploads/profile.jpg"
+}

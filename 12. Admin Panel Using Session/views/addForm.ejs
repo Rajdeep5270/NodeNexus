@@ -1,0 +1,117 @@
+<%- include('header') %>
+
+    <main class="main-content" id="mainContent">
+        <div class="content-header">
+            <h1>Add Employee</h1>
+            <p>Fill in the details below to add a new employee.</p>
+        </div>
+
+        <div class="card form-card">
+            <h3><i class="fas fa-user-plus"></i> Employee Details</h3>
+
+            <form action="/addEmployee" method="POST" class="employee-form" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <!-- first name section  -->
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="John">
+                    </div>
+
+                    <!-- last name section  -->
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Doe">
+                    </div>
+
+                    <!-- email section  -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com">
+                    </div>
+
+                    <!-- password section  -->
+                    <div class="form-group">
+                        <label for="lastName">Password</label>
+                        <input type="password" id="lastName" name="password" placeholder="********">
+                    </div>
+
+                    <!-- phone number section  -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900">
+                    </div>
+
+                    <!-- gender section -->
+                    <div class="form-group">
+                        <label>Gender</label>
+
+                        <div class="radio-group">
+                            <label class="radio-card">
+                                <input type="radio" name="gender" value="Male">
+                                <span>Male</span>
+                            </label>
+
+                            <label class="radio-card">
+                                <input type="radio" name="gender" value="Female">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- hobby section  -->
+                    <div class="form-group">
+                        <label>Hobbies</label>
+
+                        <div class="checkbox-group">
+                            <%["Reading", "Travelling" , "Music" , "Sports" , "Others" ].map(ele=> {%>
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="hobbies" value="<%= ele %>">
+                                    <span>
+                                        <%= ele%>
+                                    </span>
+                                </label>
+                                <%})%>
+                        </div>
+                    </div>
+
+                    <!-- city section  -->
+                    <div class="form-group">
+                        <label for="department">City</label>
+                        <select id="department" name="city">
+                            <option value="">Select City</option>
+                            <option value="Surat">Surat</option>
+                            <option value="Jaipur">Jaipur</option>
+                            <option value="Navsari">Navsari</option>
+                            <option value="Bhavnagar">Bhavnagar</option>
+                        </select>
+                    </div>
+
+                    <!-- about section  -->
+                    <div class="form-group full-width">
+                        <label for="address">About</label>
+                        <textarea id="about" name="about" rows="3" placeholder="Write About..."></textarea>
+                    </div>
+
+                    <!-- proflie image upload section  -->
+                    <div class="form-group">
+                        <label>Profile Image</label>
+                        <input type="file" id="profileImage" name="profileImage" required>
+                    </div>
+
+
+                </div>
+
+                <!-- submit buttons  -->
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Employee
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <%- include('footer') %>
