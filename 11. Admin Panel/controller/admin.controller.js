@@ -212,6 +212,12 @@ module.exports.verifyOtp = (req, res) => {
 // change password through otp page rendering 
 module.exports.changePasswordThroughOTPPage = (req, res) => {
     try {
+        if (!req.cookies.OTP) {
+            console.log("Bahut hoshiyar bante ho...");
+            return res.redirect('/dashboardPage');
+        }
+
+        console.log("OTP found...");
         res.clearCookie('OTP');
         return res.render('auth/changePasswordThroughOTP');
     } catch (err) {
@@ -239,6 +245,7 @@ module.exports.changePasswordThroughOTP = async (req, res) => {
         }
 
         console.log("Password changed successfully...");
+        res.clearCookie('id');
         return res.redirect('/');
     } catch (err) {
         console.log("Something went wrong...");
