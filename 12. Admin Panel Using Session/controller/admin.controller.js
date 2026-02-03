@@ -17,6 +17,24 @@ module.exports.loginPage = async (req, res) => {
 // admin login logic 
 module.exports.adminLogin = async (req, res) => {
     try {
+        // const adminFound = await admin.findOne({ email: req.body.email });
+
+        // if (!adminFound) {
+        //     console.log("Admin not found...");
+        //     return res.redirect('/');
+        // };
+
+        // // for debugging 
+        // // console.log(req.body.password);
+        // // console.log(adminFound.password);
+
+        // if (req.body.password !== adminFound.password) {
+        //     console.log("Password not match");
+        //     return res.redirect('/');
+        // };
+
+        // res.cookie("adminId", adminFound.id);
+
         console.log("Admin login successfully...");
         return res.redirect('/dashboardPage');
     } catch (e) {
@@ -29,7 +47,7 @@ module.exports.adminLogin = async (req, res) => {
 // change password page rendering
 module.exports.changePasswordPage = async (req, res) => {
     try {
-        return res.render('auth/changePasswordPage', { findAdmin });
+        return res.render('auth/changePasswordPage');
     } catch (e) {
         console.log("Something went wrong...");
         console.log("Error : ", e);
@@ -85,6 +103,12 @@ module.exports.changePassword = async (req, res) => {
 // admin page 
 module.exports.profilePage = async (req, res) => {
     try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
         return res.render('profile/profilePage', { findAdmin });
     } catch (e) {
         console.log("Something went wrong...");
@@ -176,6 +200,12 @@ module.exports.verifyOtp = (req, res) => {
 // change password through otp page rendering 
 module.exports.changePasswordThroughOTPPage = (req, res) => {
     try {
+        if (!req.cookies.OTP) {
+            console.log("Bahut hoshiyar bante ho...");
+            return res.redirect('/dashboardPage');
+        }
+
+        console.log("OTP found...");
         res.clearCookie('OTP');
         return res.render('auth/changePasswordThroughOTP');
     } catch (err) {
@@ -203,6 +233,7 @@ module.exports.changePasswordThroughOTP = async (req, res) => {
         }
 
         console.log("Password changed successfully...");
+        res.clearCookie('id');
         return res.redirect('/');
     } catch (err) {
         console.log("Something went wrong...");
@@ -220,6 +251,12 @@ module.exports.logout = (req, res) => {
 // dashboard page rendering 
 module.exports.dashboardPage = async (req, res) => {
     try {
+        // const findAdmin = await admin.findById(req.cookies.adminId);
+
+        // if (req.cookies.adminId == undefined && !findAdmin) {
+        //     return res.redirect('/');
+        // }
+
         return res.render('dashboard');
 
     } catch (e) {
@@ -232,6 +269,12 @@ module.exports.dashboardPage = async (req, res) => {
 // view admin page 
 module.exports.viewAdminPage = async (req, res) => {
     try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
+
         let allAdminData = await admin.find();
 
         // if some one login his data not be shown here logic 
@@ -255,6 +298,11 @@ module.exports.viewAdminPage = async (req, res) => {
 // add admin form page rendering 
 module.exports.addAdminFormPage = async (req, res) => {
     try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
 
         return res.render('addForm', { findAdmin });
 
@@ -318,6 +366,11 @@ module.exports.deleteAdmin = async (req, res) => {
 //edit admin logic 
 module.exports.editAdmin = async (req, res) => {
     try {
+        const findAdmin = await admin.findById(req.cookies.adminId);
+
+        if (req.cookies.adminId == undefined && !findAdmin) {
+            return res.redirect('/');
+        }
         // console.log(req.params);
         const editAdmin = await admin.findById(req.params.id);
 

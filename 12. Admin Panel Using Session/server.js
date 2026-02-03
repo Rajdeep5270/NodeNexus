@@ -2,10 +2,8 @@ const express = require('express');
 require('./config/db.config');
 
 const cookieparser = require('cookie-parser');
-const passport = require('passport');
 const session = require('express-session');
-
-require('./middleware/passport.local.middleware');
+const passport = require('passport');
 
 const app = express();
 
@@ -17,15 +15,14 @@ app.use(express.static(__dirname));
 
 app.use(cookieparser());
 
-// set up session 
 app.use(session({
     name: "AdminSession",
-    secret: "AdminPanel12@22",
+    secret: "Admin2200@12",
     resave: true,
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
-    }
+    },
 }));
 
 app.use(passport.initialize());
