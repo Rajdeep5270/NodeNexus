@@ -5,6 +5,8 @@ const cookieparser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 
+require('./middleware/passport.local.middleware');
+
 const app = express();
 
 const PORT = 8080;
@@ -27,6 +29,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.currentAdmin);
 
 // routes required here 
 app.use('/', require('./routes/admin.route'))

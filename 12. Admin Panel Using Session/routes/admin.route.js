@@ -4,59 +4,61 @@ const passport = require('passport');
 const uploads = require('../middleware/multer.middleware');
 require('../middleware/passport.local.middleware');
 
-const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin, editAdmin, updateAdmin, loginPage, adminLogin, logout, changePasswordPage, changePassword, profilePage, verifyEmail, verifyOtp, changePasswordThroughOTP, changePasswordThroughOTPPage } = require('../controller/admin.controller');
+const { dashboardPage, viewAdminPage, addAdminFormPage, addEmployeeDetails, deleteAdmin, editAdmin, updateAdmin, loginPage, adminLogin, logout, changePasswordPage, changePassword, profilePage, verifyEmail, verifyOtp, changePasswordThroughOTP, changePasswordThroughOTPPage, verifyEmailPage, verifyOtpPage } = require('../controller/admin.controller');
 
 const route = express.Router();
 
 // route for login 
-route.get('/', loginPage);
+route.get('/', passport.checkAuthIsNotDone, loginPage);
 
 // admin login logic 
-route.post('/login', passport.authenticate('localAuth', {
+route.post('/login', passport.checkAuthIsNotDone, passport.authenticate('localAuth', {
     failureRedirect: "/",
 }), adminLogin);
 
 // change password page rendering 
-route.get('/changePasswordPage', changePasswordPage);
+route.get('/changePasswordPage', passport.checkAuthIsDone, changePasswordPage);
 
 // change password logic 
-route.post('/changePassword', changePassword);
+route.post('/changePassword', passport.checkAuthIsDone, changePassword);
 
 // verify email 
-route.post('/verify-email', verifyEmail);
+route.get('/verify-email', passport.checkAuthIsNotDone, verifyEmailPage);
+route.post('/verify-email', passport.checkAuthIsNotDone, verifyEmail);
 
 // otp verify logic and new password change page logic 
-route.post('/verifyOTp', verifyOtp);
+route.get('/verifyOtpPage', passport.checkAuthIsNotDone, verifyOtpPage);
+route.post('/verifyOTp', passport.checkAuthIsNotDone, verifyOtp);
 
 // new password page through otp 
-route.get('/changePasswordThroughOTPPage', changePasswordThroughOTPPage);
-route.post('/changePasswordThroughOTP', changePasswordThroughOTP);
+route.get('/changePasswordThroughOTPPage', passport.checkAuthIsNotDone, changePasswordThroughOTPPage);
+route.post('/changePasswordThroughOTP', passport.checkAuthIsNotDone, changePasswordThroughOTP);
 
 // admin logout logic 
-route.get('/logout', logout);
+route.get('/logout', passport.checkAuthIsDone, logout);
 
-route.get('/profile', profilePage);
+route.get('/profile', passport.checkAuthIsDone, profilePage);
 
 // route for dashboard or home page 
-route.get('/dashboardPage', dashboardPage);
+route.get('/dashboardPage', passport.checkAuthIsDone, dashboardPage);
 
 // route for all admin view page 
-route.get('/viewAdminPage', viewAdminPage);
+route.get('/viewAdminPage', passport.checkAuthIsDone, viewAdminPage);
 
 // route for add admin form page 
-route.get('/addAdminFormPage', addAdminFormPage);
+route.get('/addAdminFormPage', passport.checkAuthIsDone, addAdminFormPage);
 
 // route for error 
-route.get('/notFound', addAdminFormPage);
+route.get('/notFound', passport.checkAuthIsDone, addAdminFormPage);
 
 // route for add employee 
-route.post('/addEmployee', uploads.single('profileImage'), addEmployeeDetails);
+route.post('/addEmployee', passport.checkAuthIsDone, uploads.single('profileImage'), addEmployeeDetails);
 
 // delete admin logic 
-route.get('/deleteAdmin/:id', deleteAdmin);
+route.get('/deleteAdmin/:id', passport.checkAuthIsDone, deleteAdmin);
 
 // edit admin route
-route.get('/editAdmin/:id', editAdmin)
-route.post('/updateAdmin/:id', uploads.single('profileImage'), updateAdmin)
+route.get('/editAdmin/:id', passport.checkAuthIsDone, editAdmin)
+route.post('/updateAdmin/:id', passport.checkAuthIsDone, uploads.single('profileImage'), updateAdmin)
 
 module.exports = route;

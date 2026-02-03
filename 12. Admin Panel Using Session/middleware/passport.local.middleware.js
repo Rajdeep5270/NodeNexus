@@ -24,10 +24,34 @@ passport.use('localAuth', new localStrategy({
 
 passport.serializeUser((admin, done) => {
     return done(null, admin.id);
-})
+});
 
 passport.deserializeUser(async (adminId, done) => {
     const currentAdmin = await Admin.findById(adminId);
 
     return done(null, currentAdmin);
-})
+});
+
+passport.checkAuthIsDone = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    return res.redirect('/');
+};
+
+passport.checkAuthIsNotDone = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+
+    return res.redirect('/dashboardPage');
+}
+
+passport.currentAdmin = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        res.locals.findAdmin = req.user;
+    }
+
+    return next();
+}

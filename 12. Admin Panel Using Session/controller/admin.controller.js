@@ -103,18 +103,17 @@ module.exports.changePassword = async (req, res) => {
 // admin page 
 module.exports.profilePage = async (req, res) => {
     try {
-        const findAdmin = await admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !findAdmin) {
-            return res.redirect('/');
-        }
-
-        return res.render('profile/profilePage', { findAdmin });
+        return res.render('profile/profilePage');
     } catch (e) {
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
     }
+}
+
+// email verification page rendering 
+module.exports.verifyEmailPage = (req, res) => {
+    return res.render('auth/emailVerifyPage');
 }
 
 // verify email logic 
@@ -171,7 +170,7 @@ module.exports.verifyEmail = async (req, res) => {
         // console.log(info.messageId);
 
         // otp page rendering 
-        return res.render('auth/otp-verification');
+        return res.redirect('/dashboardPage');
 
     } catch (e) {
         console.log("Something went wrong...");
@@ -180,12 +179,21 @@ module.exports.verifyEmail = async (req, res) => {
     }
 }
 
+// otp verification page rendering 
+module.exports.verifyOtpPage = (req, res) => {
+    if (!req.cookies.OTP) {
+        console.log("Bahut hoshiyar bante ho...");
+        return res.redirect('/');
+    }
+    return res.render('auth/otp-verification');
+}
+
 // verify otp logic and redirecting new password page 
 module.exports.verifyOtp = (req, res) => {
     try {
         if (req.body.adminOTP !== req.cookies.OTP) {
             console.log("OTP not matched...");
-            return res.redirect('/');
+            return res.redirect('/verifyOtpPage');
         }
 
         return res.redirect('/changePasswordThroughOTPPage');
@@ -244,19 +252,12 @@ module.exports.changePasswordThroughOTP = async (req, res) => {
 
 // admin logout logic 
 module.exports.logout = (req, res) => {
-    res.clearCookie('adminId');
     res.redirect('/');
 }
 
 // dashboard page rendering 
 module.exports.dashboardPage = async (req, res) => {
     try {
-        // const findAdmin = await admin.findById(req.cookies.adminId);
-
-        // if (req.cookies.adminId == undefined && !findAdmin) {
-        //     return res.redirect('/');
-        // }
-
         return res.render('dashboard');
 
     } catch (e) {
@@ -269,16 +270,9 @@ module.exports.dashboardPage = async (req, res) => {
 // view admin page 
 module.exports.viewAdminPage = async (req, res) => {
     try {
-        const findAdmin = await admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !findAdmin) {
-            return res.redirect('/');
-        }
-
         let allAdminData = await admin.find();
-
         // if some one login his data not be shown here logic 
-        allAdminData = allAdminData.filter(subAdmin => subAdmin.email != findAdmin.email)
+        allAdminData = allAdminData.filter(subAdmin => subAdmin.email != res.locals.findAdmin.email)
 
         if (!allAdminData) {
             console.log("Admin Data Not Found");
@@ -286,7 +280,7 @@ module.exports.viewAdminPage = async (req, res) => {
         }
 
         console.log("Admin Data Found")
-        return res.render('viewAll', { allAdminData, findAdmin });
+        return res.render('viewAll', { allAdminData });
 
     } catch (e) {
         console.log("Something went wrong...");
@@ -298,13 +292,7 @@ module.exports.viewAdminPage = async (req, res) => {
 // add admin form page rendering 
 module.exports.addAdminFormPage = async (req, res) => {
     try {
-        const findAdmin = await admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !findAdmin) {
-            return res.redirect('/');
-        }
-
-        return res.render('addForm', { findAdmin });
+        return res.render('addForm');
 
     } catch (e) {
         console.log("Something went wrong...");
