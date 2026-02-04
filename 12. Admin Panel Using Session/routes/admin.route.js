@@ -16,10 +16,8 @@ route.post('/login', passport.checkAuthIsNotDone, passport.authenticate('localAu
     failureRedirect: "/",
 }), adminLogin);
 
-// change password page rendering 
+// change password page logic & rendering 
 route.get('/changePasswordPage', passport.checkAuthIsDone, changePasswordPage);
-
-// change password logic 
 route.post('/changePassword', passport.checkAuthIsDone, changePassword);
 
 // verify email 
@@ -37,6 +35,7 @@ route.post('/changePasswordThroughOTP', passport.checkAuthIsNotDone, changePassw
 // admin logout logic 
 route.get('/logout', passport.checkAuthIsDone, logout);
 
+// profile page renderign 
 route.get('/profile', passport.checkAuthIsDone, profilePage);
 
 // route for dashboard or home page 

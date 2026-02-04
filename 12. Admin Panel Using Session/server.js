@@ -20,7 +20,7 @@ app.use(cookieparser());
 app.use(session({
     name: "AdminSession",
     secret: "Admin2200@12",
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,

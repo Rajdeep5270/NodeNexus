@@ -2,6 +2,19 @@ const admin = require('../models/admin.model');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
+// to destroy session function 
+function destroySession(req, res) {
+    req.session.destroy((err) => {
+        if (!err) {
+            res.clearCookie('AdminSession', { path: '/' });
+
+            console.log("logout successfully...");
+            return res.redirect('/');
+        }
+        return res.redirect('/dashboardPage');
+    })
+}
+
 // login page rendering 
 module.exports.loginPage = async (req, res) => {
     try {
@@ -34,7 +47,6 @@ module.exports.adminLogin = async (req, res) => {
         // };
 
         // res.cookie("adminId", adminFound.id);
-
         console.log("Admin login successfully...");
         return res.redirect('/dashboardPage');
     } catch (e) {
@@ -58,13 +70,7 @@ module.exports.changePasswordPage = async (req, res) => {
 // change password logic 
 module.exports.changePassword = async (req, res) => {
     try {
-        const findAdmin = await admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !findAdmin) {
-            return res.redirect('/');
-        }
-
-        console.log(req.body);
+        const findAdmin = res.locals.findAdmin;
 
         const { curr_pass, new_pass, conf_pass } = req.body;
 
@@ -91,8 +97,7 @@ module.exports.changePassword = async (req, res) => {
         }
 
         console.log("Password is Changed");
-        res.clearCookie('adminId');
-        return res.redirect('/');
+        destroySession(req, res);
     } catch (e) {
         console.log("Something went wrong...");
         console.log("Error : ", e);
@@ -123,7 +128,7 @@ module.exports.verifyEmail = async (req, res) => {
 
         if (!adminVerify) {
             console.log("Admin not found...");
-            return res.redirect('/');
+            return res.redirect('/verify-email');
         }
 
         // console.log(adminVerify);
@@ -170,7 +175,7 @@ module.exports.verifyEmail = async (req, res) => {
         // console.log(info.messageId);
 
         // otp page rendering 
-        return res.redirect('/dashboardPage');
+        return res.redirect('/verifyOtpPage');
 
     } catch (e) {
         console.log("Something went wrong...");
@@ -208,13 +213,12 @@ module.exports.verifyOtp = (req, res) => {
 // change password through otp page rendering 
 module.exports.changePasswordThroughOTPPage = (req, res) => {
     try {
-        if (!req.cookies.OTP) {
-            console.log("Bahut hoshiyar bante ho...");
-            return res.redirect('/dashboardPage');
+        res.clearCookie('OTP');
+
+        if (!req.cookies.id) {
+            return res.redirect('/');
         }
 
-        console.log("OTP found...");
-        res.clearCookie('OTP');
         return res.render('auth/changePasswordThroughOTP');
     } catch (err) {
         console.log("Something went wrong...");
@@ -252,7 +256,7 @@ module.exports.changePasswordThroughOTP = async (req, res) => {
 
 // admin logout logic 
 module.exports.logout = (req, res) => {
-    res.redirect('/');
+    destroySession(req, res);
 }
 
 // dashboard page rendering 
@@ -354,15 +358,10 @@ module.exports.deleteAdmin = async (req, res) => {
 //edit admin logic 
 module.exports.editAdmin = async (req, res) => {
     try {
-        const findAdmin = await admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !findAdmin) {
-            return res.redirect('/');
-        }
         // console.log(req.params);
         const editAdmin = await admin.findById(req.params.id);
 
-        res.render('editForm', { editAdmin, findAdmin });
+        res.render('editForm', { editAdmin });
 
     } catch (e) {
         console.log("Something went wrong...");
@@ -374,15 +373,8 @@ module.exports.editAdmin = async (req, res) => {
 // update admin logic
 module.exports.updateAdmin = async (req, res) => {
     try {
-        // console.log(req.file);
+        const findAdmin = res.locals.findAdmin;
         if (req.file) {
-            const findAdmin = await admin.findById(req.cookies.adminId);
-            // console.log(findAdmin);
-
-            // if (req.cookies.adminId == undefined && !findAdmin) {
-            //     return res.redirect('/');
-            // }
-
             console.log(req.file.path);
             req.body.profileImage = req.file.path;
 
@@ -402,9 +394,7 @@ module.exports.updateAdmin = async (req, res) => {
             console.log("Admin updated successfully");
         }
         else {
-            const findAdmin = await admin.findById(req.cookies.adminId);
-
-            const updatedAdmin = await admin.findByIdAndUpdate(req.params.id, req.body);
+            const updatedAdmin = await admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
             if (!updatedAdmin) {
                 console.log("Admin not updated");

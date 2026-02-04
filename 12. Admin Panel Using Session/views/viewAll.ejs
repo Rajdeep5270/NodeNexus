@@ -1,74 +1,85 @@
 <%- include('header') %>
     <div class="main-content">
         <div class="admin-view">
-
-            <div class="content-header">
-                <h1>Admin List</h1>
-                <p>All registered admins are listed below</p>
+            <div class="content-header-flex">
+                <div>
+                    <h1>Admin Directory</h1>
+                    <p>Manage all registered administrators</p>
+                </div>
             </div>
 
-            <div class="admin-grid">
-                <% allAdminData.map((admin,index)=> { %>
-
-                    <!-- admin cards -->
-                    <div class="admin-card-box">
-                        <div class="admin-avatar">
-                            <img src="<%= admin.profileImage %>" alt="Admin">
-                        </div>
-
-                        <span class="admin-index">
-                            ID : <%= index+1 %>
-                        </span>
-
-                        <h3 class="admin-title">
-                            <i class="fas fa-user-shield"></i>
-                            <%= admin.firstName %>
-                                <%= admin.lastName %>
-                        </h3>
-
-                        <p class="admin-detail">
-                            <i class="fas fa-envelope"></i>
-                            <%= admin.email %>
-                        </p>
-
-                        <p class="admin-detail">
-                            <i class="fas fa-phone"></i>
-                            <%= admin.phone %>
-                        </p>
-
-                        <p class="admin-detail">
-                            <i class="fas fa-venus-mars"></i>
-                            <%= admin.gender %>
-                        </p>
-
-                        <p class="admin-detail">
-                            <i class="fas fa-city"></i>
-                            <%= admin.city %>
-                        </p>
-
-                        <p class="admin-detail">
-                            <i class="fas fa-heart"></i>
-                            <%= admin.hobbies %>
-                        </p>
-
-                        <% if(findAdmin.email==="rajdeepex5270@gmail.com" ) {%>
-                            <div class="admin-card-actions">
-                                <a href="/deleteAdmin/<%= admin.id %>">
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-trash-alt"></i> Delete
-                                    </button>
-                                </a>
-                                <a href="/editAdmin/<%= admin.id %>">
-                                    <button class="btn btn-secondary">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </button>
-                                </a>
-                            </div>
-                            <%}%>
-                    </div>
-                    <% }) %>
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th width="50">ID</th>
+                            <th>Admin Name</th>
+                            <th>Contact Details</th>
+                            <th>Location</th>
+                            <th>Hobbies</th>
+                            <% if(findAdmin.email==="rajdeepex5270@gmail.com" ) { %>
+                                <th class="text-right">Actions</th>
+                                <% } %>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% allAdminData.map((admin, index)=> { %>
+                            <tr>
+                                <td>
+                                    <% if(admin.email==="rajdeepex5270@gmail.com" ) { %>
+                                        <span class="badge-id" style="background-color: gold;">♕</span>
+                                        <% } else { %>
+                                            <span class="badge-id">#<%= index + 1 %></span>
+                                            <%}%>
+                                </td>
+                                <td>
+                                    <div class="admin-profile-cell">
+                                        <img src="<%= admin.profileImage %>" class="mini-avatar" alt="Admin">
+                                        <div class="admin-name-info">
+                                            <strong>
+                                                <%= admin.firstName %>
+                                                    <%= admin.lastName %>
+                                            </strong>
+                                            <small>
+                                                <%= admin.gender %>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="contact-stack">
+                                        <span><i class="fas fa-envelope"></i>
+                                            <%= admin.email %>
+                                        </span>
+                                        <span><i class="fas fa-phone"></i>
+                                            <%= admin.phone %>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td><span class="text-muted"><i class="fas fa-city"></i>
+                                        <%= admin.city %>
+                                    </span></td>
+                                <td><span class="text-muted"><i class="fas fa-heart"></i>
+                                        <%= admin.hobbies %>
+                                    </span></td>
+                                <% if(findAdmin.email==="rajdeepex5270@gmail.com" ) { %>
+                                    <td class="text-right">
+                                        <div class="action-buttons-compact">
+                                            <a href="/editAdmin/<%= admin.id %>" class="btn-icon edit" title="Edit">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="/deleteAdmin/<%= admin.id %>" class="btn-icon delete"
+                                                title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <% } %>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
             </div>
-
         </div>
     </div>
     <%- include('footer') %>

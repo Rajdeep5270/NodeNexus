@@ -37,6 +37,7 @@ body {
 }
 
 /* Navbar Styles */
+
 .navbar {
     position: fixed;
     top: 0;
@@ -125,6 +126,53 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--dark-color);
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #fff;
+    min-width: 180px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition);
+    z-index: 2000;
+}
+
+.dropdown-menu a {
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dark-color);
+    font-size: 0.95rem;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+}
+
+/* Active state */
+.user-dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /* Sidebar Styles */
@@ -708,6 +756,20 @@ body {
 }
 
 /* profile image section  */
+.admin-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+}
+
+.admin-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
 .image-preview img {
     width: 100%;
     border-radius: 50%;
@@ -805,84 +867,172 @@ body {
 }
 
 /* <=================view page css=========================>  */
-
-/* Admin View Page */
-.admin-view {
-    padding: 2rem;
+/* Container and Header Adjustments */
+.content-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
 }
 
-/* Grid */
-.admin-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-/* Card */
-.admin-card-box {
-    background: #fff;
-    border-radius: 10px;
+/* Table Design */
+.admin-table-wrapper {
+    background: white;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    padding: 1.5rem;
-    text-align: center;
-    transition: 0.3s ease;
+    border: 1px solid #eef0f7;
+    overflow-x: auto;
+    /* For mobile responsiveness */
 }
 
-.admin-card-box:hover {
-    transform: translateY(-5px);
-}
-
-/* Avatar */
-.admin-avatar {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 1rem;
-}
-
-.admin-avatar img {
+.admin-table {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--primary-color);
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
 }
 
-/* Index */
-.admin-index {
-    display: inline-block;
-    margin-bottom: 0.4rem;
+/* Row Height & Padding */
+.admin-table thead th {
+    background-color: #f8fafc;
+    padding: 12px 20px;
     font-weight: 600;
     color: var(--secondary-color);
+    border-bottom: 2px solid #edf2f7;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
 }
 
-/* Title */
-.admin-title {
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
+.admin-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s ease;
 }
 
-/* Details */
-.admin-detail {
+.admin-table tbody tr:hover {
+    background-color: #f8faff;
+}
+
+.admin-table tbody td {
+    padding: 20px 30px;
+    /* Small height row */
+    vertical-align: middle;
+}
+
+/* Profile Cell - Compact */
+.admin-profile-cell {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 0.3rem;
+    gap: 12px;
 }
 
-.admin-detail i {
+.mini-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+.admin-name-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.admin-name-info strong {
+    color: var(--dark-color);
+    font-size: 0.95rem;
+}
+
+.admin-name-info small {
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Contact Stack - Compact */
+.contact-stack {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.contact-stack i {
+    width: 14px;
+    color: var(--primary-color);
+    margin-right: 5px;
+}
+
+/* Badge ID */
+.badge-id {
+    font-size: 18px;
+    font-family: monospace;
+    background: #f1f5f9;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #64748b;
+}
+
+/* Actions - Compact Icons */
+.action-buttons-compact {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.btn-icon.edit {
+    background: #eef2ff;
     color: var(--primary-color);
 }
 
-/* Actions */
-.admin-card-actions {
-    margin-top: 1.2rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
+.btn-icon.delete {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.btn-icon:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.95);
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-muted {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table tbody td {
+        display: block;
+        padding: 5px 20px;
+        border: none;
+    }
+
+    .admin-table tbody tr {
+        padding: 10px 0;
+        display: block;
+    }
 }
 
 /* <================view Page css ends here===================> */

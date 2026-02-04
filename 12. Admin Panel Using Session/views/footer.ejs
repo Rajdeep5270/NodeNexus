@@ -71,6 +71,22 @@
             developer community</p>
     </div>
 </footer>
+
+<script>
+    // header buttons dropdown logic 
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+    const userDropdown = document.querySelector('.user-dropdown');
+
+    dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('active');
+    });
+
+    document.addEventListener('click', () => {
+        userDropdown.classList.remove('active');
+    });
+</script>
+
 </body>
 
 </html>

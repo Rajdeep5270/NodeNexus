@@ -20,16 +20,24 @@
             <span>DashboardPro</span>
         </div>
 
-        <ul class="nav-links">
-            <li><a href="/dashboardPage" class="active">Dashboard</a></li>
-            <li><a href="/viewAdminPage">View</a></li>
-            <li><a href="/addAdminFormPage">Add Form</a></li>
-        </ul>
-
         <div class="user-actions">
-            <a href="/changePasswordPage"><button class="login-btn">Change Password</button></a>
-            <a href="/logout"><button class="login-btn">Logout</button></a>
+            <div class="user-dropdown">
+                <button class="login-btn dropdown-btn">
+                    <i class="fas fa-user-circle"></i> Account
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <div class="dropdown-menu">
+                    <a href="/changePasswordPage">
+                        <i class="fas fa-key"></i> Change Password
+                    </a>
+                    <a href="/logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
         </div>
+
 
         <div class="mobile-toggle" id="mobileToggle">
             <i class="fas fa-bars"></i>
@@ -41,14 +49,14 @@
         <div class="sidebar-header">
             <a href="/profile">
                 <h3><i class="fas fa-user-shield"></i>
-                    <%= findAdmin.fname%>
-                        <%= findAdmin.lname%>
+                    <%= findAdmin.firstName%>
+                        <%= findAdmin.lastName%>
                 </h3>
             </a>
         </div>
 
         <ul class="sidebar-menu">
-            <li><a href="/dashboardPage" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="/dashboardPage"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="/viewAdminPage"><i class="fas fa-chart-line"></i> View</a></li>
             <li><a href="/addAdminFormPage"><i class="fas fa-project-diagram"></i> Add Form</a></li>
         </ul>

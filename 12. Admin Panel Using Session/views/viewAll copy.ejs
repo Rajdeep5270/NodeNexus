@@ -1,0 +1,71 @@
+<%- include('header') %>
+    <div class="main-content">
+        <div class="admin-view">
+            <div class="content-header">
+                <h1>Admin Management</h1>
+                <p>Viewing all registered administrators in system list view.</p>
+            </div>
+
+            <div class="admin-list-container">
+                <div class="list-header">
+                    <span>Admin Details</span>
+                    <span>Contact Info</span>
+                    <span>Location & Hobbies</span>
+                    <% if(findAdmin.email==="rajdeepex5270@gmail.com" ) { %>
+                        <span style="text-align: right;">Actions</span>
+                        <% } %>
+                </div>
+
+                <% allAdminData.map((admin, index)=> { %>
+                    <div class="admin-list-row">
+                        <div class="admin-main-info">
+                            <div class="row-avatar">
+                                <img src="<%= admin.profileImage %>" alt="Admin">
+                                <span class="row-id">#<%= index + 1 %></span>
+                            </div>
+                            <div class="name-box">
+                                <h3 class="admin-name">
+                                    <%= admin.firstName %>
+                                        <%= admin.lastName %>
+                                </h3>
+                                <span class="gender-tag">
+                                    <%= admin.gender %>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="admin-contact-info">
+                            <p><i class="fas fa-envelope"></i>
+                                <%= admin.email %>
+                            </p>
+                            <p><i class="fas fa-phone"></i>
+                                <%= admin.phone %>
+                            </p>
+                        </div>
+
+                        <div class="admin-extra-info">
+                            <p><i class="fas fa-city"></i>
+                                <%= admin.city %>
+                            </p>
+                            <p><i class="fas fa-heart"></i>
+                                <%= admin.hobbies %>
+                            </p>
+                        </div>
+
+                        <% if(findAdmin.email==="rajdeepex5270@gmail.com" ) { %>
+                            <div class="admin-row-actions">
+                                <a href="/editAdmin/<%= admin.id %>" class="action-link edit" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/deleteAdmin/<%= admin.id %>" class="action-link delete" title="Delete"
+                                    onclick="return confirm('Delete this admin?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                            <% } %>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include('footer') %>
