@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 function destroySession(req, res) {
     req.session.destroy((err) => {
         if (!err) {
-            res.clearCookie('AdminSession', { path: '/' });
+            res.clearCookie('AdminSession');
 
             console.log("logout successfully...");
             return res.redirect('/');
@@ -30,7 +30,7 @@ module.exports.loginPage = async (req, res) => {
 // admin login logic 
 module.exports.adminLogin = async (req, res) => {
     try {
-        // const adminFound = await admin.findOne({ email: req.body.email });
+        const adminFound = await admin.findOne({ email: req.body.email });
 
         // if (!adminFound) {
         //     console.log("Admin not found...");
@@ -47,9 +47,12 @@ module.exports.adminLogin = async (req, res) => {
         // };
 
         // res.cookie("adminId", adminFound.id);
+
+        req.flash('success', `Welcome back ${adminFound.firstName} ${adminFound.lastName}`);
         console.log("Admin login successfully...");
         return res.redirect('/dashboardPage');
     } catch (e) {
+        req.flash('error', "Something went wrong")
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -75,16 +78,19 @@ module.exports.changePassword = async (req, res) => {
         const { curr_pass, new_pass, conf_pass } = req.body;
 
         if (curr_pass != findAdmin.password) {
-            console.log("Current password in wrong.");
+            req.flash('error', "Current password is wrong");
+            console.log("Current password is wrong.");
             return res.redirect('/changePasswordPage');
         }
 
         if (new_pass == findAdmin.password) {
+            req.flash('error', "New and old password are same")
             console.log("New and old password are same.");
             return res.redirect('/changePasswordPage');
         }
 
         if (new_pass != conf_pass) {
+            req.flash('error', "New password and confirm password not matched")
             console.log("New password and confirm password not matched");
             return res.redirect('/changePasswordPage');
         }
@@ -92,13 +98,16 @@ module.exports.changePassword = async (req, res) => {
         const changedPassword = await admin.findByIdAndUpdate(findAdmin.id, { password: conf_pass }, { new: true });
 
         if (!changedPassword) {
+            req.flash('error', "Password not changed");
             console.log("Password not changed");
             return res.redirect('/changePasswordPage');
         }
 
-        console.log("Password is Changed");
+        req.flash('success', "Password changed successfully")
+        console.log("Password is changed");
         destroySession(req, res);
     } catch (e) {
+        req.flash('error', "Something went wront");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -110,6 +119,7 @@ module.exports.profilePage = async (req, res) => {
     try {
         return res.render('profile/profilePage');
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -127,6 +137,7 @@ module.exports.verifyEmail = async (req, res) => {
         const adminVerify = await admin.findOne(req.body);
 
         if (!adminVerify) {
+            req.flash('error', "Admin not found");
             console.log("Admin not found...");
             return res.redirect('/verify-email');
         }
@@ -178,6 +189,7 @@ module.exports.verifyEmail = async (req, res) => {
         return res.redirect('/verifyOtpPage');
 
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -197,6 +209,7 @@ module.exports.verifyOtpPage = (req, res) => {
 module.exports.verifyOtp = (req, res) => {
     try {
         if (req.body.adminOTP !== req.cookies.OTP) {
+            req.flash('error', "OTP not matched");
             console.log("OTP not matched...");
             return res.redirect('/verifyOtpPage');
         }
@@ -204,6 +217,7 @@ module.exports.verifyOtp = (req, res) => {
         return res.redirect('/changePasswordThroughOTPPage');
 
     } catch (err) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", err);
         res.redirect('/notFound');
@@ -221,6 +235,7 @@ module.exports.changePasswordThroughOTPPage = (req, res) => {
 
         return res.render('auth/changePasswordThroughOTP');
     } catch (err) {
+        req.flash("Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", err);
         res.redirect('/notFound');
@@ -231,6 +246,7 @@ module.exports.changePasswordThroughOTPPage = (req, res) => {
 module.exports.changePasswordThroughOTP = async (req, res) => {
     try {
         if (req.body.newPassword !== req.body.confirmPassword) {
+            req.flash('error', "New and confirm password not matched");
             console.log("New and confirm password not matched...");
             return res.redirect('/changePasswordThroughOTPPage');
         }
@@ -240,14 +256,17 @@ module.exports.changePasswordThroughOTP = async (req, res) => {
         console.log(adminFound);
 
         if (!adminFound) {
+            req.flash('error', "Admin not found");
             console.log("Admin not found...");
             return res.redirect('/changePasswordThroughOTPPage');
         }
 
+        req.flash('success', "Password changed successfully");
         console.log("Password changed successfully...");
         res.clearCookie('id');
         return res.redirect('/');
     } catch (err) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", err);
         res.redirect('/notFound');
@@ -265,6 +284,7 @@ module.exports.dashboardPage = async (req, res) => {
         return res.render('dashboard');
 
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -279,6 +299,7 @@ module.exports.viewAdminPage = async (req, res) => {
         allAdminData = allAdminData.filter(subAdmin => subAdmin.email != res.locals.findAdmin.email)
 
         if (!allAdminData) {
+            req.flash('error', "Admin data not found");
             console.log("Admin Data Not Found");
             res.redirect('/notFound');
         }
@@ -287,6 +308,7 @@ module.exports.viewAdminPage = async (req, res) => {
         return res.render('viewAll', { allAdminData });
 
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -299,6 +321,7 @@ module.exports.addAdminFormPage = async (req, res) => {
         return res.render('addForm');
 
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -320,13 +343,16 @@ module.exports.addEmployeeDetails = async (req, res) => {
         const adminAdded = await admin.create(req.body);
 
         if (!adminAdded) {
+            req.flash('error', "Admin insertion unsuccessfull");
             console.log("Admin Insertion Unsuccessfull...");
             return res.redirect('/notFound');
         }
 
+        req.flash('success', "Admin insertion successfull");
         console.log("Admin Added Successfully...");
     }
     catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound')
@@ -341,14 +367,17 @@ module.exports.deleteAdmin = async (req, res) => {
         console.log(deletedAdmin);
 
         if (!deletedAdmin) {
+            req.flash('error', "Admin deletion failed");
             console.log("Admin not deleted");
             return res.redirect('/notFound')
         }
 
         fs.unlink(deletedAdmin.profileImage, () => { });
+        req.flash('success', `${deletedAdmin.firstName} ${deletedAdmin.lastName} deleted successfully`);
         console.log("Admin deleted successfully");
         res.redirect('/viewAdminPage');
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -364,6 +393,7 @@ module.exports.editAdmin = async (req, res) => {
         res.render('editForm', { editAdmin });
 
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');
@@ -383,33 +413,40 @@ module.exports.updateAdmin = async (req, res) => {
             fs.unlink(updatedAdmin.profileImage, () => { });
 
             if (!updatedAdmin) {
+                req.flash('error', `${updatedAdmin.firstName} ${updatedAdmin.lastName} not updated`);
                 console.log("Admin not updated");
                 return res.redirect('/editAdmin')
             }
 
             if (updatedAdmin.id == findAdmin.id) {
+                req.flash('success', `${updatedAdmin.firstName} ${updatedAdmin.lastName} updated successfully`);
                 return res.redirect('/profile');
             }
 
+            req.flash('success', `${updatedAdmin.firstName} ${updatedAdmin.lastName} updated successfully`);
             console.log("Admin updated successfully");
         }
         else {
             const updatedAdmin = await admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
             if (!updatedAdmin) {
+                req.flash('error', `${updatedAdmin.firstName} ${updatedAdmin.lastName} not updated`);
                 console.log("Admin not updated");
                 return res.redirect('/editAdmin')
             }
 
             if (updatedAdmin.id == findAdmin.id) {
+                req.flash('success', `${updatedAdmin.firstName} ${updatedAdmin.lastName} updated successfully`);
                 return res.redirect('/profile');
             }
 
+            req.flash('success', `${updatedAdmin.firstName} ${updatedAdmin.lastName} updated successfully`);
             console.log("Admin updated successfully");
         }
 
         return res.redirect('/viewAdminPage')
     } catch (e) {
+        req.flash('error', "Something went wrong");
         console.log("Something went wrong...");
         console.log("Error : ", e);
         res.redirect('/notFound');

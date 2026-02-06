@@ -4,6 +4,8 @@ require('./config/db.config');
 const cookieparser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
+const setFlash = require('./middleware/connect.flash.middleware');
 
 require('./middleware/passport.local.middleware');
 
@@ -27,9 +29,12 @@ app.use(session({
     },
 }));
 
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.currentAdmin);
+app.use(setFlash);
 
 // routes required here 
 app.use('/', require('./routes/admin.route'))

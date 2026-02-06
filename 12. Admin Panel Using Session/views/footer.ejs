@@ -72,7 +72,30 @@
     </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.all.min.js"></script>
+
+
 <script>
+    if (<%= locals.flash.success.length > 0 && locals.flash.success !== "" %>) {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "<%= locals.flash.success %>",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
+    if (<%= locals.flash.error.length > 0 && locals.flash.error !== "" %>) {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "<%= locals.flash.error %>",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
     // header buttons dropdown logic 
     const dropdownBtn = document.querySelector('.dropdown-btn');
     const userDropdown = document.querySelector('.user-dropdown');
@@ -85,6 +108,7 @@
     document.addEventListener('click', () => {
         userDropdown.classList.remove('active');
     });
+
 </script>
 
 </body>
